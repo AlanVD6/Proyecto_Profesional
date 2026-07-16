@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyLite Compiler &mdash; Analizador Léxico, Sintáctico y Semántico</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header class="app-header">
+        <h1>PyLite Compiler</h1>
+        <p class="subtitle">
+            Analizador léxico, sintáctico y semántico de un subconjunto de Python,
+            construido con Flask (MVC) y ANTLR4.
+        </p>
+    </header>
+
+    <main class="container">
+
+        <section class="upload-card">
+            <h2>1. Sube tu archivo fuente</h2>
+            <p class="hint">Formatos aceptados: <code>.py</code> / <code>.txt</code> (máx. 2&nbsp;MB)</p>
+
+            <form id="analyzeForm">
+                <div class="file-drop" id="fileDrop">
+                    <input type="file" id="sourcefile" name="archivo_fuente" accept=".py,.txt" required>
+                    <label for="sourcefile" id="fileLabel">
+                        <span class="file-icon">&#128196;</span>
+                        <span id="fileLabelText">Selecciona un archivo o arrástralo aquí</span>
+                    </label>
+                </div>
+
+                <button type="submit" id="analyzeBtn" class="btn-primary">
+                    Analizar código
+                </button>
+            </form>
+        </section>
+
+        <section class="progress-card" id="progressCard" hidden>
+            <h2>2. Progreso del análisis</h2>
+            <div class="progress-bar-track">
+                <div class="progress-bar-fill" id="progressFill"></div>
+            </div>
+            <p class="progress-status" id="progressStatus">Esperando…</p>
+
+            <ol class="phase-steps" id="phaseSteps">
+                <li data-phase="upload">Subiendo archivo</li>
+                <li data-phase="lexico">Análisis léxico</li>
+                <li data-phase="sintactico">Análisis sintáctico</li>
+                <li data-phase="semantico">Análisis semántico</li>
+            </ol>
+        </section>
+
+        <section class="results-card" id="resultsCard" hidden>
+            <h2>3. Resultado</h2>
+            <div id="resultsContent"></div>
+        </section>
+
+    </main>
+
+    <footer class="app-footer">
+        <p>Proyecto académico &mdash; SCD-1016 Lenguajes y Autómatas II</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

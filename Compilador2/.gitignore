@@ -1,0 +1,8 @@
+venv/
+__pycache__/
+*.pyc
+uploads/*.py
+uploads/*.txt
+!uploads/.gitkeep
+.vscode/
+*.jar
