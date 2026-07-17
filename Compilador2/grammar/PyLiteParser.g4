@@ -1,16 +1,4 @@
 parser grammar PyLiteParser;
-
-// =======================================================================
-// PyLiteParser.g4
-// ----------------
-// Version simplificada: en vez de una cadena larga de reglas de
-// precedencia (orExpr -> andExpr -> ... -> atom), se usa UNA sola regla
-// "expr" recursiva con alternativas ETIQUETADAS. ANTLR resuelve la
-// precedencia automaticamente segun el ORDEN de las alternativas: las
-// de arriba se aplican primero (mayor precedencia), igual que se hace
-// en los ejercicios sencillos de calculadora con ANTLR.
-// =======================================================================
-
 options {
     tokenVocab = PyLiteLexer;
 }
@@ -85,9 +73,6 @@ block
     | simpleStmt
     ;
 
-// ---------------------------------------------------------------------
-// Expresiones: de mayor a menor precedencia (arriba = se evalua primero)
-// ---------------------------------------------------------------------
 expr
     : expr LPAREN argList? RPAREN                          # callExpr
     | expr LBRACKET expr RBRACKET                          # indexExpr
