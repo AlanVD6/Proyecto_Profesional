@@ -51,18 +51,18 @@ def crear_clase_visitor_semantico(ClaseVisitorGenerado, ClaseParserGenerado):
 
         def visitReturnStmt(self, ctx):
             if self.profundidad_funcion == 0:
-                self._error(ctx.RETORNAR().getSymbol(),
+                self._error(ctx.RETURN().getSymbol(),
                     "la sentencia 'return' se usa fuera de una funcion (SEM06)")
             if ctx.expr():
                 self.visit(ctx.expr())
             return None
 
         def visitSmallStmt(self, ctx):
-            if ctx.ROMPER() is not None and self.profundidad_bucle == 0:
-                self._error(ctx.ROMPER().getSymbol(),
+            if ctx.BREAK() is not None and self.profundidad_bucle == 0:
+                self._error(ctx.BREAK().getSymbol(),
                     "la sentencia 'break' se usa fuera de un bucle (SEM07)")
-            if ctx.CONTINUAR() is not None and self.profundidad_bucle == 0:
-                self._error(ctx.CONTINUAR().getSymbol(),
+            if ctx.CONTINUE() is not None and self.profundidad_bucle == 0:
+                self._error(ctx.CONTINUE().getSymbol(),
                     "la sentencia 'continue' se usa fuera de un bucle (SEM07)")
             return self.visitChildren(ctx)
 

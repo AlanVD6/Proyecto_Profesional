@@ -115,22 +115,22 @@ class PyLiteParser ( Parser ):
                      "'('", "')'", "'['", "']'", "'{'", "'}'", "','", "':'", 
                      "'.'", "';'", "'@'", "'->'", "'...'" ]
 
-    symbolicNames = [ "<INVALID>", "INDENT", "DEDENT", "FALSE", "AWAIT", 
+    symbolicNames = [ "<INVALID>", "INDENTACION", "DESINDENTACION", "FALSE", "AWAIT", 
                       "ELSE", "IMPORT", "PASS", "NONE", "BREAK", "EXCEPT", 
                       "IN", "RAISE", "TRUE", "CLASS", "FINALLY", "IS", "RETURN", 
                       "AND", "CONTINUE", "FOR", "LAMBDA", "TRY", "AS", "DEF", 
                       "FROM", "NONLOCAL", "WHILE", "ASSERT", "DEL", "GLOBAL", 
                       "NOT", "WITH", "ASYNC", "ELIF", "IF", "OR", "YIELD", 
-                      "PLUS", "MINUS", "STAR", "DOUBLESTAR", "SLASH", "DOUBLESLASH", 
-                      "PERCENT", "EQ", "NEQ", "LE", "GE", "LT", "GT", "ASSIGN", 
-                      "PLUS_ASSIGN", "MINUS_ASSIGN", "STAR_ASSIGN", "SLASH_ASSIGN", 
-                      "DSLASH_ASSIGN", "PERCENT_ASSIGN", "POWER_ASSIGN", 
-                      "AMP_ASSIGN", "PIPE_ASSIGN", "CARET_ASSIGN", "RSHIFT_ASSIGN", 
-                      "LSHIFT_ASSIGN", "WALRUS", "AMP", "PIPE", "CARET", 
-                      "TILDE", "LSHIFT", "RSHIFT", "LPAREN", "RPAREN", "LBRACKET", 
-                      "RBRACKET", "LBRACE", "RBRACE", "COMMA", "COLON", 
-                      "DOT", "SEMI", "AT", "ARROW", "ELLIPSIS", "NAME", 
-                      "INT", "FLOAT", "STRING", "COMMENT", "WS", "NEWLINE" ]
+                      "SUMA", "RESTA", "POR", "POTENCIA", "DIVISION", "DIVISION_ENTERA", 
+                      "MODULO", "IGUAL_QUE", "DISTINTO_DE", "MENOR_O_IGUAL_QUE", "MAYOR_O_IGUAL_QUE", "MENOR_QUE", "MAYOR_QUE", "IGUAL", 
+                      "IGUAL_SUMA", "IGUAL_RESTA", "IGUAL_POR", "IGUAL_DIVISION", 
+                      "IGUAL_DIVISION_ENTERA", "IGUAL_MODULO", "IGUAL_POTENCIA", 
+                      "IGUAL_AND_BIT", "IGUAL_OR_BIT", "IGUAL_XOR_BIT", "IGUAL_DESPLAZ_DER", 
+                      "IGUAL_DESPLAZ_IZQ", "IGUAL_EN_EXPRESION", "AND_BIT", "OR_BIT", "XOR_BIT", 
+                      "NEGACION_BIT", "DESPLAZAMIENTO_IZQUIERDA", "DESPLAZAMIENTO_DERECHA", "PARENTESIS_IZQUIERDO", "PARENTESIS_DERECHO", "CORCHETE_IZQUIERDO", 
+                      "CORCHETE_DERECHO", "LLAVE_IZQUIERDA", "LLAVE_DERECHA", "COMA", "DOS_PUNTOS", 
+                      "PUNTO", "PUNTO_Y_COMA", "ARROBA", "FLECHA", "PUNTOS_SUSPENSIVOS", "ID", 
+                      "ENTERO", "FLOTANTE", "CADENA", "COMENTARIO", "ESPACIOS", "NUEVA_LINEA" ]
 
     RULE_program = 0
     RULE_statement = 1
@@ -157,8 +157,8 @@ class PyLiteParser ( Parser ):
                    "block", "expr", "argList", "atom" ]
 
     EOF = Token.EOF
-    INDENT=1
-    DEDENT=2
+    INDENTACION=1
+    DESINDENTACION=2
     FALSE=3
     AWAIT=4
     ELSE=5
@@ -194,59 +194,59 @@ class PyLiteParser ( Parser ):
     IF=35
     OR=36
     YIELD=37
-    PLUS=38
-    MINUS=39
-    STAR=40
-    DOUBLESTAR=41
-    SLASH=42
-    DOUBLESLASH=43
-    PERCENT=44
-    EQ=45
-    NEQ=46
-    LE=47
-    GE=48
-    LT=49
-    GT=50
-    ASSIGN=51
-    PLUS_ASSIGN=52
-    MINUS_ASSIGN=53
-    STAR_ASSIGN=54
-    SLASH_ASSIGN=55
-    DSLASH_ASSIGN=56
-    PERCENT_ASSIGN=57
-    POWER_ASSIGN=58
-    AMP_ASSIGN=59
-    PIPE_ASSIGN=60
-    CARET_ASSIGN=61
-    RSHIFT_ASSIGN=62
-    LSHIFT_ASSIGN=63
-    WALRUS=64
-    AMP=65
-    PIPE=66
-    CARET=67
-    TILDE=68
-    LSHIFT=69
-    RSHIFT=70
-    LPAREN=71
-    RPAREN=72
-    LBRACKET=73
-    RBRACKET=74
-    LBRACE=75
-    RBRACE=76
-    COMMA=77
-    COLON=78
-    DOT=79
-    SEMI=80
-    AT=81
-    ARROW=82
-    ELLIPSIS=83
-    NAME=84
-    INT=85
-    FLOAT=86
-    STRING=87
-    COMMENT=88
-    WS=89
-    NEWLINE=90
+    SUMA=38
+    RESTA=39
+    POR=40
+    POTENCIA=41
+    DIVISION=42
+    DIVISION_ENTERA=43
+    MODULO=44
+    IGUAL_QUE=45
+    DISTINTO_DE=46
+    MENOR_O_IGUAL_QUE=47
+    MAYOR_O_IGUAL_QUE=48
+    MENOR_QUE=49
+    MAYOR_QUE=50
+    IGUAL=51
+    IGUAL_SUMA=52
+    IGUAL_RESTA=53
+    IGUAL_POR=54
+    IGUAL_DIVISION=55
+    IGUAL_DIVISION_ENTERA=56
+    IGUAL_MODULO=57
+    IGUAL_POTENCIA=58
+    IGUAL_AND_BIT=59
+    IGUAL_OR_BIT=60
+    IGUAL_XOR_BIT=61
+    IGUAL_DESPLAZ_DER=62
+    IGUAL_DESPLAZ_IZQ=63
+    IGUAL_EN_EXPRESION=64
+    AND_BIT=65
+    OR_BIT=66
+    XOR_BIT=67
+    NEGACION_BIT=68
+    DESPLAZAMIENTO_IZQUIERDA=69
+    DESPLAZAMIENTO_DERECHA=70
+    PARENTESIS_IZQUIERDO=71
+    PARENTESIS_DERECHO=72
+    CORCHETE_IZQUIERDO=73
+    CORCHETE_DERECHO=74
+    LLAVE_IZQUIERDA=75
+    LLAVE_DERECHA=76
+    COMA=77
+    DOS_PUNTOS=78
+    PUNTO=79
+    PUNTO_Y_COMA=80
+    ARROBA=81
+    FLECHA=82
+    PUNTOS_SUSPENSIVOS=83
+    ID=84
+    ENTERO=85
+    FLOTANTE=86
+    CADENA=87
+    COMENTARIO=88
+    ESPACIOS=89
+    NUEVA_LINEA=90
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -267,11 +267,11 @@ class PyLiteParser ( Parser ):
         def EOF(self):
             return self.getToken(PyLiteParser.EOF, 0)
 
-        def NEWLINE(self, i:int=None):
+        def NUEVA_LINEA(self, i:int=None):
             if i is None:
-                return self.getTokens(PyLiteParser.NEWLINE)
+                return self.getTokens(PyLiteParser.NUEVA_LINEA)
             else:
-                return self.getToken(PyLiteParser.NEWLINE, i)
+                return self.getToken(PyLiteParser.NUEVA_LINEA, i)
 
         def statement(self, i:int=None):
             if i is None:
@@ -304,7 +304,7 @@ class PyLiteParser ( Parser ):
             _la = self._input.LA(1)
             while _la==90:
                 self.state = 36
-                self.match(PyLiteParser.NEWLINE)
+                self.match(PyLiteParser.NUEVA_LINEA)
                 self.state = 41
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
@@ -401,14 +401,14 @@ class PyLiteParser ( Parser ):
                 return self.getTypedRuleContext(PyLiteParser.SmallStmtContext,i)
 
 
-        def NEWLINE(self):
-            return self.getToken(PyLiteParser.NEWLINE, 0)
+        def NUEVA_LINEA(self):
+            return self.getToken(PyLiteParser.NUEVA_LINEA, 0)
 
-        def SEMI(self, i:int=None):
+        def PUNTO_Y_COMA(self, i:int=None):
             if i is None:
-                return self.getTokens(PyLiteParser.SEMI)
+                return self.getTokens(PyLiteParser.PUNTO_Y_COMA)
             else:
-                return self.getToken(PyLiteParser.SEMI, i)
+                return self.getToken(PyLiteParser.PUNTO_Y_COMA, i)
 
         def getRuleIndex(self):
             return PyLiteParser.RULE_simpleStmt
@@ -437,7 +437,7 @@ class PyLiteParser ( Parser ):
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     self.state = 55
-                    self.match(PyLiteParser.SEMI)
+                    self.match(PyLiteParser.PUNTO_Y_COMA)
                     self.state = 56
                     self.smallStmt() 
                 self.state = 61
@@ -449,11 +449,11 @@ class PyLiteParser ( Parser ):
             _la = self._input.LA(1)
             if _la==80:
                 self.state = 62
-                self.match(PyLiteParser.SEMI)
+                self.match(PyLiteParser.PUNTO_Y_COMA)
 
 
             self.state = 65
-            self.match(PyLiteParser.NEWLINE)
+            self.match(PyLiteParser.NUEVA_LINEA)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -564,8 +564,8 @@ class PyLiteParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def NAME(self):
-            return self.getToken(PyLiteParser.NAME, 0)
+        def ID(self):
+            return self.getToken(PyLiteParser.ID, 0)
 
         def assignOp(self):
             return self.getTypedRuleContext(PyLiteParser.AssignOpContext,0)
@@ -594,7 +594,7 @@ class PyLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 75
-            self.match(PyLiteParser.NAME)
+            self.match(PyLiteParser.ID)
             self.state = 76
             self.assignOp()
             self.state = 77
@@ -615,20 +615,20 @@ class PyLiteParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def ASSIGN(self):
-            return self.getToken(PyLiteParser.ASSIGN, 0)
+        def IGUAL(self):
+            return self.getToken(PyLiteParser.IGUAL, 0)
 
-        def PLUS_ASSIGN(self):
-            return self.getToken(PyLiteParser.PLUS_ASSIGN, 0)
+        def IGUAL_SUMA(self):
+            return self.getToken(PyLiteParser.IGUAL_SUMA, 0)
 
-        def MINUS_ASSIGN(self):
-            return self.getToken(PyLiteParser.MINUS_ASSIGN, 0)
+        def IGUAL_RESTA(self):
+            return self.getToken(PyLiteParser.IGUAL_RESTA, 0)
 
-        def STAR_ASSIGN(self):
-            return self.getToken(PyLiteParser.STAR_ASSIGN, 0)
+        def IGUAL_POR(self):
+            return self.getToken(PyLiteParser.IGUAL_POR, 0)
 
-        def SLASH_ASSIGN(self):
-            return self.getToken(PyLiteParser.SLASH_ASSIGN, 0)
+        def IGUAL_DIVISION(self):
+            return self.getToken(PyLiteParser.IGUAL_DIVISION, 0)
 
         def getRuleIndex(self):
             return PyLiteParser.RULE_assignOp
@@ -849,11 +849,11 @@ class PyLiteParser ( Parser ):
                 return self.getTypedRuleContext(PyLiteParser.ExprContext,i)
 
 
-        def COLON(self, i:int=None):
+        def DOS_PUNTOS(self, i:int=None):
             if i is None:
-                return self.getTokens(PyLiteParser.COLON)
+                return self.getTokens(PyLiteParser.DOS_PUNTOS)
             else:
-                return self.getToken(PyLiteParser.COLON, i)
+                return self.getToken(PyLiteParser.DOS_PUNTOS, i)
 
         def block(self, i:int=None):
             if i is None:
@@ -895,7 +895,7 @@ class PyLiteParser ( Parser ):
             self.state = 94
             self.expr(0)
             self.state = 95
-            self.match(PyLiteParser.COLON)
+            self.match(PyLiteParser.DOS_PUNTOS)
             self.state = 96
             self.block()
             self.state = 104
@@ -907,7 +907,7 @@ class PyLiteParser ( Parser ):
                 self.state = 98
                 self.expr(0)
                 self.state = 99
-                self.match(PyLiteParser.COLON)
+                self.match(PyLiteParser.DOS_PUNTOS)
                 self.state = 100
                 self.block()
                 self.state = 106
@@ -921,7 +921,7 @@ class PyLiteParser ( Parser ):
                 self.state = 107
                 self.match(PyLiteParser.ELSE)
                 self.state = 108
-                self.match(PyLiteParser.COLON)
+                self.match(PyLiteParser.DOS_PUNTOS)
                 self.state = 109
                 self.block()
 
@@ -949,8 +949,8 @@ class PyLiteParser ( Parser ):
             return self.getTypedRuleContext(PyLiteParser.ExprContext,0)
 
 
-        def COLON(self):
-            return self.getToken(PyLiteParser.COLON, 0)
+        def DOS_PUNTOS(self):
+            return self.getToken(PyLiteParser.DOS_PUNTOS, 0)
 
         def block(self):
             return self.getTypedRuleContext(PyLiteParser.BlockContext,0)
@@ -979,7 +979,7 @@ class PyLiteParser ( Parser ):
             self.state = 113
             self.expr(0)
             self.state = 114
-            self.match(PyLiteParser.COLON)
+            self.match(PyLiteParser.DOS_PUNTOS)
             self.state = 115
             self.block()
         except RecognitionException as re:
@@ -1001,8 +1001,8 @@ class PyLiteParser ( Parser ):
         def FOR(self):
             return self.getToken(PyLiteParser.FOR, 0)
 
-        def NAME(self):
-            return self.getToken(PyLiteParser.NAME, 0)
+        def ID(self):
+            return self.getToken(PyLiteParser.ID, 0)
 
         def IN(self):
             return self.getToken(PyLiteParser.IN, 0)
@@ -1011,8 +1011,8 @@ class PyLiteParser ( Parser ):
             return self.getTypedRuleContext(PyLiteParser.ExprContext,0)
 
 
-        def COLON(self):
-            return self.getToken(PyLiteParser.COLON, 0)
+        def DOS_PUNTOS(self):
+            return self.getToken(PyLiteParser.DOS_PUNTOS, 0)
 
         def block(self):
             return self.getTypedRuleContext(PyLiteParser.BlockContext,0)
@@ -1039,13 +1039,13 @@ class PyLiteParser ( Parser ):
             self.state = 117
             self.match(PyLiteParser.FOR)
             self.state = 118
-            self.match(PyLiteParser.NAME)
+            self.match(PyLiteParser.ID)
             self.state = 119
             self.match(PyLiteParser.IN)
             self.state = 120
             self.expr(0)
             self.state = 121
-            self.match(PyLiteParser.COLON)
+            self.match(PyLiteParser.DOS_PUNTOS)
             self.state = 122
             self.block()
         except RecognitionException as re:
@@ -1067,17 +1067,17 @@ class PyLiteParser ( Parser ):
         def DEF(self):
             return self.getToken(PyLiteParser.DEF, 0)
 
-        def NAME(self):
-            return self.getToken(PyLiteParser.NAME, 0)
+        def ID(self):
+            return self.getToken(PyLiteParser.ID, 0)
 
-        def LPAREN(self):
-            return self.getToken(PyLiteParser.LPAREN, 0)
+        def PARENTESIS_IZQUIERDO(self):
+            return self.getToken(PyLiteParser.PARENTESIS_IZQUIERDO, 0)
 
-        def RPAREN(self):
-            return self.getToken(PyLiteParser.RPAREN, 0)
+        def PARENTESIS_DERECHO(self):
+            return self.getToken(PyLiteParser.PARENTESIS_DERECHO, 0)
 
-        def COLON(self):
-            return self.getToken(PyLiteParser.COLON, 0)
+        def DOS_PUNTOS(self):
+            return self.getToken(PyLiteParser.DOS_PUNTOS, 0)
 
         def block(self):
             return self.getTypedRuleContext(PyLiteParser.BlockContext,0)
@@ -1109,9 +1109,9 @@ class PyLiteParser ( Parser ):
             self.state = 124
             self.match(PyLiteParser.DEF)
             self.state = 125
-            self.match(PyLiteParser.NAME)
+            self.match(PyLiteParser.ID)
             self.state = 126
-            self.match(PyLiteParser.LPAREN)
+            self.match(PyLiteParser.PARENTESIS_IZQUIERDO)
             self.state = 128
             self._errHandler.sync(self)
             _la = self._input.LA(1)
@@ -1121,9 +1121,9 @@ class PyLiteParser ( Parser ):
 
 
             self.state = 130
-            self.match(PyLiteParser.RPAREN)
+            self.match(PyLiteParser.PARENTESIS_DERECHO)
             self.state = 131
-            self.match(PyLiteParser.COLON)
+            self.match(PyLiteParser.DOS_PUNTOS)
             self.state = 132
             self.block()
         except RecognitionException as re:
@@ -1142,17 +1142,17 @@ class PyLiteParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def NAME(self, i:int=None):
+        def ID(self, i:int=None):
             if i is None:
-                return self.getTokens(PyLiteParser.NAME)
+                return self.getTokens(PyLiteParser.ID)
             else:
-                return self.getToken(PyLiteParser.NAME, i)
+                return self.getToken(PyLiteParser.ID, i)
 
-        def COMMA(self, i:int=None):
+        def COMA(self, i:int=None):
             if i is None:
-                return self.getTokens(PyLiteParser.COMMA)
+                return self.getTokens(PyLiteParser.COMA)
             else:
-                return self.getToken(PyLiteParser.COMMA, i)
+                return self.getToken(PyLiteParser.COMA, i)
 
         def getRuleIndex(self):
             return PyLiteParser.RULE_paramList
@@ -1174,15 +1174,15 @@ class PyLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 134
-            self.match(PyLiteParser.NAME)
+            self.match(PyLiteParser.ID)
             self.state = 139
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==77:
                 self.state = 135
-                self.match(PyLiteParser.COMMA)
+                self.match(PyLiteParser.COMA)
                 self.state = 136
-                self.match(PyLiteParser.NAME)
+                self.match(PyLiteParser.ID)
                 self.state = 141
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
@@ -1203,14 +1203,14 @@ class PyLiteParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def NEWLINE(self):
-            return self.getToken(PyLiteParser.NEWLINE, 0)
+        def NUEVA_LINEA(self):
+            return self.getToken(PyLiteParser.NUEVA_LINEA, 0)
 
-        def INDENT(self):
-            return self.getToken(PyLiteParser.INDENT, 0)
+        def INDENTACION(self):
+            return self.getToken(PyLiteParser.INDENTACION, 0)
 
-        def DEDENT(self):
-            return self.getToken(PyLiteParser.DEDENT, 0)
+        def DESINDENTACION(self):
+            return self.getToken(PyLiteParser.DESINDENTACION, 0)
 
         def statement(self, i:int=None):
             if i is None:
@@ -1247,9 +1247,9 @@ class PyLiteParser ( Parser ):
             if token in [90]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 142
-                self.match(PyLiteParser.NEWLINE)
+                self.match(PyLiteParser.NUEVA_LINEA)
                 self.state = 143
-                self.match(PyLiteParser.INDENT)
+                self.match(PyLiteParser.INDENTACION)
                 self.state = 145 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
@@ -1263,7 +1263,7 @@ class PyLiteParser ( Parser ):
                         break
 
                 self.state = 149
-                self.match(PyLiteParser.DEDENT)
+                self.match(PyLiteParser.DESINDENTACION)
                 pass
             elif token in [3, 7, 8, 9, 13, 17, 19, 31, 38, 39, 71, 84, 85, 86, 87]:
                 self.enterOuterAlt(localctx, 2)
@@ -1310,10 +1310,10 @@ class PyLiteParser ( Parser ):
             else:
                 return self.getTypedRuleContext(PyLiteParser.ExprContext,i)
 
-        def LBRACKET(self):
-            return self.getToken(PyLiteParser.LBRACKET, 0)
-        def RBRACKET(self):
-            return self.getToken(PyLiteParser.RBRACKET, 0)
+        def CORCHETE_IZQUIERDO(self):
+            return self.getToken(PyLiteParser.CORCHETE_IZQUIERDO, 0)
+        def CORCHETE_DERECHO(self):
+            return self.getToken(PyLiteParser.CORCHETE_DERECHO, 0)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitIndexExpr" ):
@@ -1331,10 +1331,10 @@ class PyLiteParser ( Parser ):
         def expr(self):
             return self.getTypedRuleContext(PyLiteParser.ExprContext,0)
 
-        def PLUS(self):
-            return self.getToken(PyLiteParser.PLUS, 0)
-        def MINUS(self):
-            return self.getToken(PyLiteParser.MINUS, 0)
+        def SUMA(self):
+            return self.getToken(PyLiteParser.SUMA, 0)
+        def RESTA(self):
+            return self.getToken(PyLiteParser.RESTA, 0)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitUnaryExpr" ):
@@ -1374,11 +1374,11 @@ class PyLiteParser ( Parser ):
             else:
                 return self.getTypedRuleContext(PyLiteParser.ExprContext,i)
 
-        def STAR(self, i:int=None):
+        def POR(self, i:int=None):
             if i is None:
-                return self.getTokens(PyLiteParser.STAR)
+                return self.getTokens(PyLiteParser.POR)
             else:
-                return self.getToken(PyLiteParser.STAR, i)
+                return self.getToken(PyLiteParser.POR, i)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitPowerExpr" ):
@@ -1399,10 +1399,10 @@ class PyLiteParser ( Parser ):
             else:
                 return self.getTypedRuleContext(PyLiteParser.ExprContext,i)
 
-        def PLUS(self):
-            return self.getToken(PyLiteParser.PLUS, 0)
-        def MINUS(self):
-            return self.getToken(PyLiteParser.MINUS, 0)
+        def SUMA(self):
+            return self.getToken(PyLiteParser.SUMA, 0)
+        def RESTA(self):
+            return self.getToken(PyLiteParser.RESTA, 0)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAddExpr" ):
@@ -1423,14 +1423,14 @@ class PyLiteParser ( Parser ):
             else:
                 return self.getTypedRuleContext(PyLiteParser.ExprContext,i)
 
-        def STAR(self):
-            return self.getToken(PyLiteParser.STAR, 0)
-        def SLASH(self):
-            return self.getToken(PyLiteParser.SLASH, 0)
-        def DOUBLESLASH(self):
-            return self.getToken(PyLiteParser.DOUBLESLASH, 0)
-        def PERCENT(self):
-            return self.getToken(PyLiteParser.PERCENT, 0)
+        def POR(self):
+            return self.getToken(PyLiteParser.POR, 0)
+        def DIVISION(self):
+            return self.getToken(PyLiteParser.DIVISION, 0)
+        def DIVISION_ENTERA(self):
+            return self.getToken(PyLiteParser.DIVISION_ENTERA, 0)
+        def MODULO(self):
+            return self.getToken(PyLiteParser.MODULO, 0)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitMulExpr" ):
@@ -1487,10 +1487,10 @@ class PyLiteParser ( Parser ):
         def expr(self):
             return self.getTypedRuleContext(PyLiteParser.ExprContext,0)
 
-        def LPAREN(self):
-            return self.getToken(PyLiteParser.LPAREN, 0)
-        def RPAREN(self):
-            return self.getToken(PyLiteParser.RPAREN, 0)
+        def PARENTESIS_IZQUIERDO(self):
+            return self.getToken(PyLiteParser.PARENTESIS_IZQUIERDO, 0)
+        def PARENTESIS_DERECHO(self):
+            return self.getToken(PyLiteParser.PARENTESIS_DERECHO, 0)
         def argList(self):
             return self.getTypedRuleContext(PyLiteParser.ArgListContext,0)
 
@@ -1514,18 +1514,18 @@ class PyLiteParser ( Parser ):
             else:
                 return self.getTypedRuleContext(PyLiteParser.ExprContext,i)
 
-        def EQ(self):
-            return self.getToken(PyLiteParser.EQ, 0)
-        def NEQ(self):
-            return self.getToken(PyLiteParser.NEQ, 0)
-        def LT(self):
-            return self.getToken(PyLiteParser.LT, 0)
-        def GT(self):
-            return self.getToken(PyLiteParser.GT, 0)
-        def LE(self):
-            return self.getToken(PyLiteParser.LE, 0)
-        def GE(self):
-            return self.getToken(PyLiteParser.GE, 0)
+        def IGUAL_QUE(self):
+            return self.getToken(PyLiteParser.IGUAL_QUE, 0)
+        def DISTINTO_DE(self):
+            return self.getToken(PyLiteParser.DISTINTO_DE, 0)
+        def MENOR_QUE(self):
+            return self.getToken(PyLiteParser.MENOR_QUE, 0)
+        def MAYOR_QUE(self):
+            return self.getToken(PyLiteParser.MAYOR_QUE, 0)
+        def MENOR_O_IGUAL_QUE(self):
+            return self.getToken(PyLiteParser.MENOR_O_IGUAL_QUE, 0)
+        def MAYOR_O_IGUAL_QUE(self):
+            return self.getToken(PyLiteParser.MAYOR_O_IGUAL_QUE, 0)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitCompareExpr" ):
@@ -1624,9 +1624,9 @@ class PyLiteParser ( Parser ):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 9)")
                         self.state = 163
-                        self.match(PyLiteParser.STAR)
+                        self.match(PyLiteParser.POR)
                         self.state = 164
-                        self.match(PyLiteParser.STAR)
+                        self.match(PyLiteParser.POR)
                         self.state = 165
                         self.expr(9)
                         pass
@@ -1719,7 +1719,7 @@ class PyLiteParser ( Parser ):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 11)")
                         self.state = 182
-                        self.match(PyLiteParser.LPAREN)
+                        self.match(PyLiteParser.PARENTESIS_IZQUIERDO)
                         self.state = 184
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
@@ -1729,7 +1729,7 @@ class PyLiteParser ( Parser ):
 
 
                         self.state = 186
-                        self.match(PyLiteParser.RPAREN)
+                        self.match(PyLiteParser.PARENTESIS_DERECHO)
                         pass
 
                     elif la_ == 8:
@@ -1740,11 +1740,11 @@ class PyLiteParser ( Parser ):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 10)")
                         self.state = 188
-                        self.match(PyLiteParser.LBRACKET)
+                        self.match(PyLiteParser.CORCHETE_IZQUIERDO)
                         self.state = 189
                         self.expr(0)
                         self.state = 190
-                        self.match(PyLiteParser.RBRACKET)
+                        self.match(PyLiteParser.CORCHETE_DERECHO)
                         pass
 
              
@@ -1775,11 +1775,11 @@ class PyLiteParser ( Parser ):
                 return self.getTypedRuleContext(PyLiteParser.ExprContext,i)
 
 
-        def COMMA(self, i:int=None):
+        def COMA(self, i:int=None):
             if i is None:
-                return self.getTokens(PyLiteParser.COMMA)
+                return self.getTokens(PyLiteParser.COMA)
             else:
-                return self.getToken(PyLiteParser.COMMA, i)
+                return self.getToken(PyLiteParser.COMA, i)
 
         def getRuleIndex(self):
             return PyLiteParser.RULE_argList
@@ -1807,7 +1807,7 @@ class PyLiteParser ( Parser ):
             _la = self._input.LA(1)
             while _la==77:
                 self.state = 198
-                self.match(PyLiteParser.COMMA)
+                self.match(PyLiteParser.COMA)
                 self.state = 199
                 self.expr(0)
                 self.state = 204
@@ -1846,8 +1846,8 @@ class PyLiteParser ( Parser ):
             super().__init__(parser)
             self.copyFrom(ctx)
 
-        def NAME(self):
-            return self.getToken(PyLiteParser.NAME, 0)
+        def ID(self):
+            return self.getToken(PyLiteParser.ID, 0)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitNameAtom" ):
@@ -1878,8 +1878,8 @@ class PyLiteParser ( Parser ):
             super().__init__(parser)
             self.copyFrom(ctx)
 
-        def FLOAT(self):
-            return self.getToken(PyLiteParser.FLOAT, 0)
+        def FLOTANTE(self):
+            return self.getToken(PyLiteParser.FLOTANTE, 0)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitFloatAtom" ):
@@ -1894,13 +1894,13 @@ class PyLiteParser ( Parser ):
             super().__init__(parser)
             self.copyFrom(ctx)
 
-        def LPAREN(self):
-            return self.getToken(PyLiteParser.LPAREN, 0)
+        def PARENTESIS_IZQUIERDO(self):
+            return self.getToken(PyLiteParser.PARENTESIS_IZQUIERDO, 0)
         def expr(self):
             return self.getTypedRuleContext(PyLiteParser.ExprContext,0)
 
-        def RPAREN(self):
-            return self.getToken(PyLiteParser.RPAREN, 0)
+        def PARENTESIS_DERECHO(self):
+            return self.getToken(PyLiteParser.PARENTESIS_DERECHO, 0)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitParenAtom" ):
@@ -1915,8 +1915,8 @@ class PyLiteParser ( Parser ):
             super().__init__(parser)
             self.copyFrom(ctx)
 
-        def INT(self):
-            return self.getToken(PyLiteParser.INT, 0)
+        def ENTERO(self):
+            return self.getToken(PyLiteParser.ENTERO, 0)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitIntAtom" ):
@@ -1931,8 +1931,8 @@ class PyLiteParser ( Parser ):
             super().__init__(parser)
             self.copyFrom(ctx)
 
-        def STRING(self):
-            return self.getToken(PyLiteParser.STRING, 0)
+        def CADENA(self):
+            return self.getToken(PyLiteParser.CADENA, 0)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitStringAtom" ):
@@ -1986,25 +1986,25 @@ class PyLiteParser ( Parser ):
                 localctx = PyLiteParser.NameAtomContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
                 self.state = 205
-                self.match(PyLiteParser.NAME)
+                self.match(PyLiteParser.ID)
                 pass
             elif token in [85]:
                 localctx = PyLiteParser.IntAtomContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
                 self.state = 206
-                self.match(PyLiteParser.INT)
+                self.match(PyLiteParser.ENTERO)
                 pass
             elif token in [86]:
                 localctx = PyLiteParser.FloatAtomContext(self, localctx)
                 self.enterOuterAlt(localctx, 3)
                 self.state = 207
-                self.match(PyLiteParser.FLOAT)
+                self.match(PyLiteParser.FLOTANTE)
                 pass
             elif token in [87]:
                 localctx = PyLiteParser.StringAtomContext(self, localctx)
                 self.enterOuterAlt(localctx, 4)
                 self.state = 208
-                self.match(PyLiteParser.STRING)
+                self.match(PyLiteParser.CADENA)
                 pass
             elif token in [13]:
                 localctx = PyLiteParser.TrueAtomContext(self, localctx)
@@ -2028,11 +2028,11 @@ class PyLiteParser ( Parser ):
                 localctx = PyLiteParser.ParenAtomContext(self, localctx)
                 self.enterOuterAlt(localctx, 8)
                 self.state = 212
-                self.match(PyLiteParser.LPAREN)
+                self.match(PyLiteParser.PARENTESIS_IZQUIERDO)
                 self.state = 213
                 self.expr(0)
                 self.state = 214
-                self.match(PyLiteParser.RPAREN)
+                self.match(PyLiteParser.PARENTESIS_DERECHO)
                 pass
             else:
                 raise NoViableAltException(self)

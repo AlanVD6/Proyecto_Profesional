@@ -255,8 +255,8 @@ class PyLiteLexer(PyLiteLexerBase):
 
     decisionsToDFA = [ DFA(ds, i) for i, ds in enumerate(atn.decisionToState) ]
 
-    INDENT = 1
-    DEDENT = 2
+    INDENTACION = 1
+    DESINDENTACION = 2
     FALSE = 3
     AWAIT = 4
     ELSE = 5
@@ -292,59 +292,59 @@ class PyLiteLexer(PyLiteLexerBase):
     IF = 35
     OR = 36
     YIELD = 37
-    PLUS = 38
-    MINUS = 39
-    STAR = 40
-    DOUBLESTAR = 41
-    SLASH = 42
-    DOUBLESLASH = 43
-    PERCENT = 44
-    EQ = 45
-    NEQ = 46
-    LE = 47
-    GE = 48
-    LT = 49
-    GT = 50
-    ASSIGN = 51
-    PLUS_ASSIGN = 52
-    MINUS_ASSIGN = 53
-    STAR_ASSIGN = 54
-    SLASH_ASSIGN = 55
-    DSLASH_ASSIGN = 56
-    PERCENT_ASSIGN = 57
-    POWER_ASSIGN = 58
-    AMP_ASSIGN = 59
-    PIPE_ASSIGN = 60
-    CARET_ASSIGN = 61
-    RSHIFT_ASSIGN = 62
-    LSHIFT_ASSIGN = 63
-    WALRUS = 64
-    AMP = 65
-    PIPE = 66
-    CARET = 67
-    TILDE = 68
-    LSHIFT = 69
-    RSHIFT = 70
-    LPAREN = 71
-    RPAREN = 72
-    LBRACKET = 73
-    RBRACKET = 74
-    LBRACE = 75
-    RBRACE = 76
-    COMMA = 77
-    COLON = 78
-    DOT = 79
-    SEMI = 80
-    AT = 81
-    ARROW = 82
-    ELLIPSIS = 83
-    NAME = 84
-    INT = 85
-    FLOAT = 86
-    STRING = 87
-    COMMENT = 88
-    WS = 89
-    NEWLINE = 90
+    SUMA = 38
+    RESTA = 39
+    POR = 40
+    POTENCIA = 41
+    DIVISION = 42
+    DIVISION_ENTERA = 43
+    MODULO = 44
+    IGUAL_QUE = 45
+    DISTINTO_DE = 46
+    MENOR_O_IGUAL_QUE = 47
+    MAYOR_O_IGUAL_QUE = 48
+    MENOR_QUE = 49
+    MAYOR_QUE = 50
+    IGUAL = 51
+    IGUAL_SUMA = 52
+    IGUAL_RESTA = 53
+    IGUAL_POR = 54
+    IGUAL_DIVISION = 55
+    IGUAL_DIVISION_ENTERA = 56
+    IGUAL_MODULO = 57
+    IGUAL_POTENCIA = 58
+    IGUAL_AND_BIT = 59
+    IGUAL_OR_BIT = 60
+    IGUAL_XOR_BIT = 61
+    IGUAL_DESPLAZ_DER = 62
+    IGUAL_DESPLAZ_IZQ = 63
+    IGUAL_EN_EXPRESION = 64
+    AND_BIT = 65
+    OR_BIT = 66
+    XOR_BIT = 67
+    NEGACION_BIT = 68
+    DESPLAZAMIENTO_IZQUIERDA = 69
+    DESPLAZAMIENTO_DERECHA = 70
+    PARENTESIS_IZQUIERDO = 71
+    PARENTESIS_DERECHO = 72
+    CORCHETE_IZQUIERDO = 73
+    CORCHETE_DERECHO = 74
+    LLAVE_IZQUIERDA = 75
+    LLAVE_DERECHA = 76
+    COMA = 77
+    DOS_PUNTOS = 78
+    PUNTO = 79
+    PUNTO_Y_COMA = 80
+    ARROBA = 81
+    FLECHA = 82
+    PUNTOS_SUSPENSIVOS = 83
+    ID = 84
+    ENTERO = 85
+    FLOTANTE = 86
+    CADENA = 87
+    COMENTARIO = 88
+    ESPACIOS = 89
+    NUEVA_LINEA = 90
 
     channelNames = [ u"DEFAULT_TOKEN_CHANNEL", u"HIDDEN" ]
 
@@ -365,36 +365,36 @@ class PyLiteLexer(PyLiteLexerBase):
             "'->'", "'...'" ]
 
     symbolicNames = [ "<INVALID>",
-            "INDENT", "DEDENT", "FALSE", "AWAIT", "ELSE", "IMPORT", "PASS", 
+            "INDENTACION", "DESINDENTACION", "FALSE", "AWAIT", "ELSE", "IMPORT", "PASS", 
             "NONE", "BREAK", "EXCEPT", "IN", "RAISE", "TRUE", "CLASS", "FINALLY", 
             "IS", "RETURN", "AND", "CONTINUE", "FOR", "LAMBDA", "TRY", "AS", 
             "DEF", "FROM", "NONLOCAL", "WHILE", "ASSERT", "DEL", "GLOBAL", 
-            "NOT", "WITH", "ASYNC", "ELIF", "IF", "OR", "YIELD", "PLUS", 
-            "MINUS", "STAR", "DOUBLESTAR", "SLASH", "DOUBLESLASH", "PERCENT", 
-            "EQ", "NEQ", "LE", "GE", "LT", "GT", "ASSIGN", "PLUS_ASSIGN", 
-            "MINUS_ASSIGN", "STAR_ASSIGN", "SLASH_ASSIGN", "DSLASH_ASSIGN", 
-            "PERCENT_ASSIGN", "POWER_ASSIGN", "AMP_ASSIGN", "PIPE_ASSIGN", 
-            "CARET_ASSIGN", "RSHIFT_ASSIGN", "LSHIFT_ASSIGN", "WALRUS", 
-            "AMP", "PIPE", "CARET", "TILDE", "LSHIFT", "RSHIFT", "LPAREN", 
-            "RPAREN", "LBRACKET", "RBRACKET", "LBRACE", "RBRACE", "COMMA", 
-            "COLON", "DOT", "SEMI", "AT", "ARROW", "ELLIPSIS", "NAME", "INT", 
-            "FLOAT", "STRING", "COMMENT", "WS", "NEWLINE" ]
+            "NOT", "WITH", "ASYNC", "ELIF", "IF", "OR", "YIELD", "SUMA", 
+            "RESTA", "POR", "POTENCIA", "DIVISION", "DIVISION_ENTERA", "MODULO", 
+            "IGUAL_QUE", "DISTINTO_DE", "MENOR_O_IGUAL_QUE", "MAYOR_O_IGUAL_QUE", "MENOR_QUE", "MAYOR_QUE", "IGUAL", "IGUAL_SUMA", 
+            "IGUAL_RESTA", "IGUAL_POR", "IGUAL_DIVISION", "IGUAL_DIVISION_ENTERA", 
+            "IGUAL_MODULO", "IGUAL_POTENCIA", "IGUAL_AND_BIT", "IGUAL_OR_BIT", 
+            "IGUAL_XOR_BIT", "IGUAL_DESPLAZ_DER", "IGUAL_DESPLAZ_IZQ", "IGUAL_EN_EXPRESION", 
+            "AND_BIT", "OR_BIT", "XOR_BIT", "NEGACION_BIT", "DESPLAZAMIENTO_IZQUIERDA", "DESPLAZAMIENTO_DERECHA", "PARENTESIS_IZQUIERDO", 
+            "PARENTESIS_DERECHO", "CORCHETE_IZQUIERDO", "CORCHETE_DERECHO", "LLAVE_IZQUIERDA", "LLAVE_DERECHA", "COMA", 
+            "DOS_PUNTOS", "PUNTO", "PUNTO_Y_COMA", "ARROBA", "FLECHA", "PUNTOS_SUSPENSIVOS", "ID", "ENTERO", 
+            "FLOTANTE", "CADENA", "COMENTARIO", "ESPACIOS", "NUEVA_LINEA" ]
 
     ruleNames = [ "FALSE", "AWAIT", "ELSE", "IMPORT", "PASS", "NONE", "BREAK", 
                   "EXCEPT", "IN", "RAISE", "TRUE", "CLASS", "FINALLY", "IS", 
                   "RETURN", "AND", "CONTINUE", "FOR", "LAMBDA", "TRY", "AS", 
                   "DEF", "FROM", "NONLOCAL", "WHILE", "ASSERT", "DEL", "GLOBAL", 
-                  "NOT", "WITH", "ASYNC", "ELIF", "IF", "OR", "YIELD", "PLUS", 
-                  "MINUS", "STAR", "DOUBLESTAR", "SLASH", "DOUBLESLASH", 
-                  "PERCENT", "EQ", "NEQ", "LE", "GE", "LT", "GT", "ASSIGN", 
-                  "PLUS_ASSIGN", "MINUS_ASSIGN", "STAR_ASSIGN", "SLASH_ASSIGN", 
-                  "DSLASH_ASSIGN", "PERCENT_ASSIGN", "POWER_ASSIGN", "AMP_ASSIGN", 
-                  "PIPE_ASSIGN", "CARET_ASSIGN", "RSHIFT_ASSIGN", "LSHIFT_ASSIGN", 
-                  "WALRUS", "AMP", "PIPE", "CARET", "TILDE", "LSHIFT", "RSHIFT", 
-                  "LPAREN", "RPAREN", "LBRACKET", "RBRACKET", "LBRACE", 
-                  "RBRACE", "COMMA", "COLON", "DOT", "SEMI", "AT", "ARROW", 
-                  "ELLIPSIS", "NAME", "INT", "HEX_DIGIT", "FLOAT", "DIGITS", 
-                  "EXPONENT", "STRING", "COMMENT", "WS", "NEWLINE" ]
+                  "NOT", "WITH", "ASYNC", "ELIF", "IF", "OR", "YIELD", "SUMA", 
+                  "RESTA", "POR", "POTENCIA", "DIVISION", "DIVISION_ENTERA", 
+                  "MODULO", "IGUAL_QUE", "DISTINTO_DE", "MENOR_O_IGUAL_QUE", "MAYOR_O_IGUAL_QUE", "MENOR_QUE", "MAYOR_QUE", "IGUAL", 
+                  "IGUAL_SUMA", "IGUAL_RESTA", "IGUAL_POR", "IGUAL_DIVISION", 
+                  "IGUAL_DIVISION_ENTERA", "IGUAL_MODULO", "IGUAL_POTENCIA", "IGUAL_AND_BIT", 
+                  "IGUAL_OR_BIT", "IGUAL_XOR_BIT", "IGUAL_DESPLAZ_DER", "IGUAL_DESPLAZ_IZQ", 
+                  "IGUAL_EN_EXPRESION", "AND_BIT", "OR_BIT", "XOR_BIT", "NEGACION_BIT", "DESPLAZAMIENTO_IZQUIERDA", "DESPLAZAMIENTO_DERECHA", 
+                  "PARENTESIS_IZQUIERDO", "PARENTESIS_DERECHO", "CORCHETE_IZQUIERDO", "CORCHETE_DERECHO", "LLAVE_IZQUIERDA", 
+                  "LLAVE_DERECHA", "COMA", "DOS_PUNTOS", "PUNTO", "PUNTO_Y_COMA", "ARROBA", "FLECHA", 
+                  "PUNTOS_SUSPENSIVOS", "ID", "ENTERO", "HEX_DIGIT", "FLOTANTE", "DIGITS", 
+                  "EXPONENT", "CADENA", "COMENTARIO", "ESPACIOS", "NUEVA_LINEA" ]
 
     grammarFileName = "PyLiteLexer.g4"
 

@@ -58,12 +58,12 @@ class PyLiteLexerBase(Lexer):
         if ancho_indentacion > cima:
             self._indentaciones.append(ancho_indentacion)
             self._tokens_pendientes.append(
-                self._crear_token(self.INDENTACION, "<INDENT>", token))
+                self._crear_token(self.INDENTACION, "<INDENTACION>", token))
         else:
             while ancho_indentacion < self._indentaciones[-1]:
                 self._indentaciones.pop()
                 self._tokens_pendientes.append(
-                    self._crear_token(self.DESINDENTACION, "<DEDENT>", token))
+                    self._crear_token(self.DESINDENTACION, "<DESINDENTACION>", token))
 
     def _manejar_fin_archivo(self, token):
         if not self._fin_alcanzado:
@@ -74,7 +74,7 @@ class PyLiteLexerBase(Lexer):
             while len(self._indentaciones) > 1:
                 self._indentaciones.pop()
                 self._tokens_pendientes.append(
-                    self._crear_token(self.DESINDENTACION, "<DEDENT>", token))
+                    self._crear_token(self.DESINDENTACION, "<DESINDENTACION>", token))
             self._tokens_pendientes.append(token)
             return self._tokens_pendientes.pop(0)
         return token
