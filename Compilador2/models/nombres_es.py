@@ -1,15 +1,15 @@
 
 NOMBRES_TOKENS_ES = {
     # Palabras reservadas
-    "FALSE": "FALSO", "AWAIT": "ESPERAR", "ELSE": "SINO", "IMPORT": "IMPORTAR",
-    "PASS": "PASAR", "NONE": "NULO", "BREAK": "ROMPER", "EXCEPT": "EXCEPTO",
-    "IN": "EN", "RAISE": "LANZAR", "TRUE": "VERDADERO", "CLASS": "CLASE",
-    "FINALLY": "FINALMENTE", "IS": "ES", "RETURN": "RETORNAR", "AND": "Y",
-    "CONTINUE": "CONTINUAR", "FOR": "PARA", "LAMBDA": "LAMBDA", "TRY": "INTENTAR",
-    "AS": "COMO", "DEF": "DEFINIR", "FROM": "DESDE", "NONLOCAL": "NO_LOCAL",
-    "WHILE": "MIENTRAS", "ASSERT": "ASEGURAR", "DEL": "ELIMINAR", "GLOBAL": "GLOBAL",
-    "NOT": "NO", "WITH": "CON", "ASYNC": "ASINCRONO", "ELIF": "SINO_SI",
-    "IF": "SI", "OR": "O", "YIELD": "CEDER",
+    "FALSE": "FALSE", "AWAIT": "AWAIT", "ELSE": "ELSE", "IMPORT": "IMPORT",
+    "PASS": "PASS", "NONE": "NONE", "BREAK": "BREAK", "EXCEPT": "EXCEPT",
+    "IN": "IN", "RAISE": "RAISE", "TRUE": "TRUE", "CLASS": "CLASS",
+    "FINALLY": "FINALLY", "IS": "IS", "RETURN": "RETURN", "AND": "AND",
+    "CONTINUE": "CONTINUE", "FOR": "FOR", "LAMBDA": "LAMBDA", "TRY": "TRY",
+    "AS": "AS", "DEF": "DEF", "FROM": "DESDE", "NONLOCAL": "NONLOCAL",
+    "WHILE": "WHILE", "ASSERT": "ASSERT", "DEL": "DEL", "GLOBAL": "GLOBAL",
+    "NOT": "NOT", "WITH": "WITH", "ASYNC": "ASYNC", "ELIF": "ELIF",
+    "IF": "IF", "OR": "OR", "YIELD": "YIELD",
 
     # Operadores aritmeticos
     "PLUS": "SUMA", "MINUS": "RESTA", "STAR": "POR", "DOUBLESTAR": "POTENCIA",
