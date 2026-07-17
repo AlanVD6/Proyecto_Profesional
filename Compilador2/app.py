@@ -1,12 +1,3 @@
-"""
-app.py
--------
-Punto de entrada de la aplicacion. Crea la instancia de Flask, carga la
-configuracion y registra el controlador (Blueprint). Se mantiene
-deliberadamente minimo: la logica de negocio vive en models/ y las
-rutas en controllers/, siguiendo la arquitectura MVC solicitada.
-"""
-
 import os
 import sys
 
@@ -34,15 +25,7 @@ def crear_aplicacion():
     aplicacion.register_blueprint(plano_analisis)
     return aplicacion
 
-
-# NOTA: la variable de modulo se deja llamada "app" (no "aplicacion")
-# porque herramientas externas de despliegue de Flask (por ejemplo
-# `flask run` o gunicorn "app:app") buscan por convencion una variable
-# con ese nombre exacto dentro de app.py; renombrarla podria dejar de
-# funcionar con esas herramientas aunque "python app.py" siga sirviendo.
 app = crear_aplicacion()
 
 if __name__ == "__main__":
-    # host=0.0.0.0 para poder probarlo tambien desde otra maquina de
-    # la red local si hace falta; debug=True solo para desarrollo.
     app.run(host="0.0.0.0", port=5000, debug=True)

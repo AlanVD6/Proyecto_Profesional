@@ -1,25 +1,8 @@
-"""
-models/error_listener.py
---------------------------
-ANTLR notifica los errores lexicos y sintacticos mediante la interfaz
-ErrorListener. Aqui se definen dos listeners propios (uno para el lexer
-y otro para el parser) que, en lugar de imprimir a stderr como hace el
-listener por omision, acumulan cada error como un objeto ErrorCompilador
-con la fase exacta, la linea, la columna y un mensaje en espaniol.
-"""
 
 from antlr4.error.ErrorListener import ErrorListener
 from models.analysis_result import ErrorCompilador, FASE_LEXICA, FASE_SINTACTICA
 
-
 class EscuchaErroresBase(ErrorListener):
-    """Listener base que solo acumula errores en una lista.
-
-    NOTA: el metodo syntaxError() no se puede renombrar; su nombre y su
-    firma de parametros son parte de la interfaz ErrorListener de ANTLR,
-    que invoca este metodo internamente con ese nombre exacto.
-    """
-
     def __init__(self, fase):
         super().__init__()
         self.fase = fase
@@ -30,7 +13,7 @@ class EscuchaErroresBase(ErrorListener):
             ErrorCompilador(
                 fase=self.fase,
                 linea=linea,
-                columna=columna + 1,  # ANTLR usa columnas base 0
+                columna=columna + 1,
                 mensaje=self._traducir(msg, simbolo_conflictivo),
             )
         )
@@ -44,10 +27,6 @@ class EscuchaErroresBase(ErrorListener):
 
 
 class EscuchaErroresLexicos(EscuchaErroresBase):
-    """Captura caracteres que no corresponden a ningun token valido
-    de la gramatica (por ejemplo, un simbolo como '@' o '$' fuera de
-    cualquier regla lexica definida)."""
-
     def __init__(self):
         super().__init__(FASE_LEXICA)
 
@@ -62,9 +41,6 @@ class EscuchaErroresLexicos(EscuchaErroresBase):
 
 
 class EscuchaErroresSintacticos(EscuchaErroresBase):
-    """Captura violaciones de la estructura gramatical: parentesis sin
-    cerrar, falta de ':' en una sentencia compuesta, indentacion
-    inconsistente, tokens inesperados, etc."""
 
     def __init__(self):
         super().__init__(FASE_SINTACTICA)

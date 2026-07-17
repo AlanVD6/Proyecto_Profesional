@@ -1,39 +1,9 @@
-"""
-models/semantic_visitor.py
-----------------------------
-Analizador semantico. Se hereda directamente de PyLiteParserVisitor (la
-clase que ANTLR genera automaticamente) y se sobreescribe un metodo
-visitX por cada regla que interesa revisar; en las demas, ANTLR sigue
-bajando por el arbol solo (comportamiento por defecto: visitChildren),
-igual que en los ejercicios de clase.
-
-IMPORTANTE: los metodos visitAssignStmt, visitReturnStmt, visitSmallStmt,
-visitWhileStmt, visitForStmt, visitFuncDef, visitAtomExpr, visitCallExpr
-y visitMulExpr NO se pueden renombrar: ANTLR los invoca automaticamente
-por ese nombre exacto (deriva del nombre de la regla/alternativa en la
-gramatica). Lo mismo aplica a los accesos ctx.NAME(), ctx.expr(),
-ctx.paramList(), etc., que son metodos generados por ANTLR.
-
-Reglas semanticas revisadas:
-  SEM01  Variable usada sin haber sido declarada antes.
-  SEM02  Asignacion compuesta (+=, -=, ...) sobre variable inexistente.
-  SEM03  Llamada a una funcion que no existe.
-  SEM04  Numero de argumentos distinto al declarado en la funcion.
-  SEM05  Redefinicion de una funcion ya declarada.
-  SEM06  'return' fuera de una funcion.
-  SEM07  'break' / 'continue' fuera de un bucle.
-  SEM08  Division / modulo entre una constante 0.
-"""
 
 from models.symbol_table import TablaSimbolos
 from models.analysis_result import ErrorCompilador, FASE_SEMANTICA
 
 
 def crear_clase_visitor_semantico(ClaseVisitorGenerado, ClaseParserGenerado):
-    """ClaseVisitorGenerado y ClaseParserGenerado se generan en tiempo de
-    ejecucion (son producto de ANTLR), asi que la clase se construye
-    aqui adentro para poder heredar de ellos directamente."""
-
     class VisitorSemantico(ClaseVisitorGenerado):
 
         def __init__(self):
@@ -42,7 +12,6 @@ def crear_clase_visitor_semantico(ClaseVisitorGenerado, ClaseParserGenerado):
             self.profundidad_bucle = 0
             self.profundidad_funcion = 0
 
-        # ------------------------------------------------------------
         def analizar(self, arbol):
             self._recolectar_firmas_funciones(arbol)
             self.visit(arbol)
@@ -56,10 +25,6 @@ def crear_clase_visitor_semantico(ClaseVisitorGenerado, ClaseParserGenerado):
                 mensaje=mensaje,
             ))
 
-        # ------------------------------------------------------------
-        # Pre-escaneo: registra todas las funciones del archivo antes
-        # de revisar los cuerpos, para permitir llamadas hacia adelante.
-        # ------------------------------------------------------------
         def _recolectar_firmas_funciones(self, ctx):
             if isinstance(ctx, ClaseParserGenerado.FuncDefContext):
                 nombre = ctx.NAME().getText()
@@ -71,10 +36,6 @@ def crear_clase_visitor_semantico(ClaseVisitorGenerado, ClaseParserGenerado):
                 hijo = ctx.getChild(i)
                 if hasattr(hijo, "getChildCount"):
                     self._recolectar_firmas_funciones(hijo)
-
-        # ------------------------------------------------------------
-        # Asignaciones: registran la variable en la tabla de simbolos
-        # ------------------------------------------------------------
         def visitAssignStmt(self, ctx):
             nombre = ctx.NAME().getText()
             operador = ctx.assignOp().getText()
@@ -88,9 +49,6 @@ def crear_clase_visitor_semantico(ClaseVisitorGenerado, ClaseParserGenerado):
             self.tabla_simbolos.definir_variable(nombre)
             return None
 
-        # ------------------------------------------------------------
-        # return / break / continue
-        # ------------------------------------------------------------
         def visitReturnStmt(self, ctx):
             if self.profundidad_funcion == 0:
                 self._error(ctx.RETURN().getSymbol(),
@@ -108,9 +66,6 @@ def crear_clase_visitor_semantico(ClaseVisitorGenerado, ClaseParserGenerado):
                     "la sentencia 'continue' se usa fuera de un bucle (SEM07)")
             return self.visitChildren(ctx)
 
-        # ------------------------------------------------------------
-        # Bucles: llevan la cuenta de anidamiento para validar break/continue
-        # ------------------------------------------------------------
         def visitWhileStmt(self, ctx):
             self.visit(ctx.expr())
             self.profundidad_bucle += 1
@@ -126,9 +81,6 @@ def crear_clase_visitor_semantico(ClaseVisitorGenerado, ClaseParserGenerado):
             self.profundidad_bucle -= 1
             return None
 
-        # ------------------------------------------------------------
-        # Funciones: nuevo ambito con sus parametros ya definidos
-        # ------------------------------------------------------------
         def visitFuncDef(self, ctx):
             self.tabla_simbolos.apilar_ambito(ctx.NAME().getText())
             if ctx.paramList():
@@ -140,9 +92,6 @@ def crear_clase_visitor_semantico(ClaseVisitorGenerado, ClaseParserGenerado):
             self.tabla_simbolos.desapilar_ambito()
             return None
 
-        # ------------------------------------------------------------
-        # Uso de un nombre "suelto" (no llamado): es una variable.
-        # ------------------------------------------------------------
         def visitAtomExpr(self, ctx):
             atomo = ctx.atom()
             if isinstance(atomo, ClaseParserGenerado.NameAtomContext):
@@ -150,9 +99,6 @@ def crear_clase_visitor_semantico(ClaseVisitorGenerado, ClaseParserGenerado):
                 return None
             return self.visitChildren(ctx)
 
-        # ------------------------------------------------------------
-        # Llamada a funcion: NOMBRE ( argumentos ).
-        # ------------------------------------------------------------
         def visitCallExpr(self, ctx):
             invocado = ctx.expr()
             if isinstance(invocado, ClaseParserGenerado.AtomExprContext) and \
@@ -186,9 +132,6 @@ def crear_clase_visitor_semantico(ClaseVisitorGenerado, ClaseParserGenerado):
                     f"la funcion '{nombre}' espera {esperados} argumento(s), "
                     f"pero se le pasaron {recibidos} (SEM04)")
 
-        # ------------------------------------------------------------
-        # Division / modulo entre una constante 0
-        # ------------------------------------------------------------
         def visitMulExpr(self, ctx):
             self.visitChildren(ctx)
             texto_operador = ctx.getChild(1).getText()

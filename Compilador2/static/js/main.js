@@ -1,17 +1,3 @@
-/**
- * static/js/main.js
- * -------------------
- * Envia el archivo seleccionado al backend Flask via AJAX (fetch +
- * FormData), sin recargar la pagina, muestra una barra de progreso con
- * las 4 etapas (subida, lexico, sintactico, semantico) y finalmente
- * despliega el resultado (exito o el detalle del error y la fase
- * exacta en la que se detuvo el analisis).
- *
- * NOTA: los id de elementos HTML (getElementById) se dejan igual que
- * en index.html a proposito; son el contrato entre el HTML y este
- * script, y cambiarlos aqui sin cambiar el HTML rompería la interfaz.
- */
-
 const formulario = document.getElementById("analyzeForm");
 const entradaArchivo = document.getElementById("sourcefile");
 const textoEtiquetaArchivo = document.getElementById("fileLabelText");
@@ -64,15 +50,6 @@ formulario.addEventListener("submit", async (e) => {
 
     const datosFormulario = new FormData();
     datosFormulario.append("archivo_fuente", entradaArchivo.files[0]);
-
-    // La barra de progreso "real" solo conoce dos momentos ciertos:
-    // cuando empieza a subir y cuando llega la respuesta completa del
-    // servidor (Flask procesa las 3 fases de forma sincrona y devuelve
-    // todo junto). Para que el usuario perciba el avance por etapas,
-    // animamos el recorrido de las primeras 3 franjas mientras la
-    // peticion esta en vuelo, y solo al recibir la respuesta saltamos
-    // a la etapa real en la que el analisis se detuvo (o al 100% si
-    // todo tuvo exito).
     establecerFase("upload", "active");
     establecerProgreso(10, "Subiendo archivo al servidor…");
 
@@ -139,19 +116,18 @@ function renderizarExito(datos) {
     html += `<div class="stats-grid">
         <div class="stat-box"><div class="stat-value">${datos.conteo_tokens}</div><div class="stat-label">Tokens generados</div></div>
         <div class="stat-box"><div class="stat-value">${datos.conteo_reglas}</div><div class="stat-label">Nodos de regla (parser)</div></div>
-        <div class="stat-box"><div class="stat-value">${datos.funciones_encontradas.length}</div><div class="stat-label">Funciones detectadas</div></div>
-        <div class="stat-box"><div class="stat-value">${datos.variables_encontradas.length}</div><div class="stat-label">Variables globales</div></div>
     </div>`;
 
-    if (datos.funciones_encontradas.length) {
-        html += `<p><strong>Funciones:</strong></p><div class="tag-list">` +
-            datos.funciones_encontradas.map(f => `<span class="tag">${escaparHtml(f)}()</span>`).join("") +
-            `</div>`;
-    }
-    if (datos.variables_encontradas.length) {
-        html += `<p><strong>Variables globales:</strong></p><div class="tag-list">` +
-            datos.variables_encontradas.map(v => `<span class="tag">${escaparHtml(v)}</span>`).join("") +
-            `</div>`;
+    if (datos.tabla_tokens && datos.tabla_tokens.length) {
+        html += `<p style="margin-top:1rem;"><strong>Tabla de tokens:</strong></p>
+                  <div class="token-table-wrap">
+                    <table class="token-table">
+                        <thead><tr><th>Token</th><th>Lexema</th></tr></thead>
+                        <tbody>` +
+            datos.tabla_tokens.map(t => `<tr><td>${escaparHtml(t.token)}</td><td>${escaparHtml(t.lexema)}</td></tr>`).join("") +
+            `</tbody>
+                    </table>
+                  </div>`;
     }
     if (datos.vista_previa_arbol) {
         html += `<p style="margin-top:1rem;"><strong>Árbol sintáctico (vista previa):</strong></p>

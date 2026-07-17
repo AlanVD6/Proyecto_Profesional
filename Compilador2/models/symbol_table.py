@@ -1,14 +1,3 @@
-"""
-models/symbol_table.py
-------------------------
-Tabla de simbolos con soporte de ambitos anidados (ambito global + un
-ambito nuevo por cada funcion). Se usa durante el analisis semantico
-para saber si una variable fue declarada antes de usarse, y para
-registrar las funciones definidas por el usuario junto con su numero
-de parametros.
-"""
-
-
 class Ambito:
     def __init__(self, nombre, padre=None):
         self.nombre = nombre
@@ -19,8 +8,6 @@ class Ambito:
         self.simbolos.add(nombre)
 
     def resolver(self, nombre):
-        """Busca el simbolo en este ambito y, si no esta, en los
-        ambitos superiores (encadenamiento lexico)."""
         ambito = self
         while ambito is not None:
             if nombre in ambito.simbolos:
@@ -31,19 +18,14 @@ class Ambito:
 
 class TablaSimbolos:
     FUNCIONES_INTEGRADAS = {
-        "print": None,   # acepta cualquier numero de argumentos
-        "range": None,   # acepta 1 a 3 argumentos
-        "len": 1,
-        "int": 1,
-        "float": 1,
-        "str": 1,
-        "bool": 1,
+        "print": None,"range": None,
+        "len": 1,"int": 1,"float": 1,"str": 1,"bool": 1,
     }
 
     def __init__(self):
         self.ambito_global = Ambito("global")
         self.ambito_actual = self.ambito_global
-        self.funciones = {}  # nombre -> numero de parametros
+        self.funciones = {} 
 
     def apilar_ambito(self, nombre):
         self.ambito_actual = Ambito(nombre, padre=self.ambito_actual)

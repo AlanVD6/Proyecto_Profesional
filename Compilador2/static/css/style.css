@@ -255,6 +255,56 @@ h2 {
     color: var(--texto-tenue);
 }
 
+.token-table-wrap {
+    margin-top: 0.4rem;
+    max-height: 300px;
+    overflow: auto;
+    border: 1px solid var(--borde-tarjeta);
+    border-radius: 8px;
+}
+
+.token-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+}
+
+.token-table thead th {
+    position: sticky;
+    top: 0;
+    background: #1f232c;
+    color: var(--texto-tenue);
+    text-align: left;
+    padding: 0.5rem 0.85rem;
+    font-weight: 600;
+    border-bottom: 1px solid var(--borde-tarjeta);
+}
+
+.token-table tbody td {
+    padding: 0.4rem 0.85rem;
+    border-bottom: 1px solid var(--borde-tarjeta);
+}
+
+.token-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.token-table tbody tr:hover {
+    background: #1f232c;
+}
+
+.token-table td:first-child {
+    color: var(--acento);
+    font-family: "Cascadia Code", Consolas, monospace;
+    white-space: nowrap;
+}
+
+.token-table td:last-child {
+    font-family: "Cascadia Code", Consolas, monospace;
+    color: #b7c6ff;
+    word-break: break-all;
+}
+
 .tree-preview {
     background: #0c0e12;
     border: 1px solid var(--borde-tarjeta);

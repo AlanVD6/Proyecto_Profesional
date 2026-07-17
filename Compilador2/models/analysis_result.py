@@ -1,13 +1,4 @@
-"""
-models/analysis_result.py
---------------------------
-Estructuras de datos (modelo, en el sentido MVC) que representan el
-resultado del analisis de un archivo fuente: en que fase se detuvo el
-proceso, y el detalle de cada error encontrado.
-"""
-
 from dataclasses import dataclass, field
-
 
 FASE_LEXICA = "lexico"
 FASE_SINTACTICA = "sintactico"
@@ -22,7 +13,7 @@ ETIQUETAS_FASE = {
 
 @dataclass
 class ErrorCompilador:
-    fase: str          # "lexico" | "sintactico" | "semantico"
+    fase: str  # "lexico" | "sintactico" | "semantico"
     linea: int
     columna: int
     mensaje: str
@@ -44,8 +35,7 @@ class ResultadoAnalisis:
     errores: list = field(default_factory=list)
     conteo_tokens: int = 0
     conteo_reglas: int = 0
-    funciones_encontradas: list = field(default_factory=list)
-    variables_encontradas: list = field(default_factory=list)
+    tabla_tokens: list = field(default_factory=list)
     vista_previa_arbol: str = ""
     nombre_archivo: str = ""
 
@@ -63,8 +53,7 @@ class ResultadoAnalisis:
             "errores": [e.a_diccionario() for e in self.errores],
             "conteo_tokens": self.conteo_tokens,
             "conteo_reglas": self.conteo_reglas,
-            "funciones_encontradas": self.funciones_encontradas,
-            "variables_encontradas": self.variables_encontradas,
+            "tabla_tokens": self.tabla_tokens,
             "vista_previa_arbol": self.vista_previa_arbol,
             "nombre_archivo": self.nombre_archivo,
         }
