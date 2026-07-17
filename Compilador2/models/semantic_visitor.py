@@ -27,21 +27,21 @@ def crear_clase_visitor_semantico(ClaseVisitorGenerado, ClaseParserGenerado):
 
         def _recolectar_firmas_funciones(self, ctx):
             if isinstance(ctx, ClaseParserGenerado.FuncDefContext):
-                nombre = ctx.NAME().getText()
-                num_parametros = len(ctx.paramList().NAME()) if ctx.paramList() else 0
+                nombre = ctx.ID().getText()
+                num_parametros = len(ctx.paramList().ID()) if ctx.paramList() else 0
                 if self.tabla_simbolos.definir_funcion(nombre, num_parametros):
-                    self._error(ctx.NAME().getSymbol(),
+                    self._error(ctx.ID().getSymbol(),
                         f"la funcion '{nombre}' ya habia sido definida antes (SEM05)")
             for i in range(ctx.getChildCount()):
                 hijo = ctx.getChild(i)
                 if hasattr(hijo, "getChildCount"):
                     self._recolectar_firmas_funciones(hijo)
         def visitAssignStmt(self, ctx):
-            nombre = ctx.NAME().getText()
+            nombre = ctx.ID().getText()
             operador = ctx.assignOp().getText()
 
             if operador != "=" and not self.tabla_simbolos.esta_definida(nombre):
-                self._error(ctx.NAME().getSymbol(),
+                self._error(ctx.ID().getSymbol(),
                     f"la variable '{nombre}' se usa con '{operador}' pero no ha sido "
                     f"declarada previamente (SEM02)")
 
@@ -51,18 +51,18 @@ def crear_clase_visitor_semantico(ClaseVisitorGenerado, ClaseParserGenerado):
 
         def visitReturnStmt(self, ctx):
             if self.profundidad_funcion == 0:
-                self._error(ctx.RETURN().getSymbol(),
+                self._error(ctx.RETORNAR().getSymbol(),
                     "la sentencia 'return' se usa fuera de una funcion (SEM06)")
             if ctx.expr():
                 self.visit(ctx.expr())
             return None
 
         def visitSmallStmt(self, ctx):
-            if ctx.BREAK() is not None and self.profundidad_bucle == 0:
-                self._error(ctx.BREAK().getSymbol(),
+            if ctx.ROMPER() is not None and self.profundidad_bucle == 0:
+                self._error(ctx.ROMPER().getSymbol(),
                     "la sentencia 'break' se usa fuera de un bucle (SEM07)")
-            if ctx.CONTINUE() is not None and self.profundidad_bucle == 0:
-                self._error(ctx.CONTINUE().getSymbol(),
+            if ctx.CONTINUAR() is not None and self.profundidad_bucle == 0:
+                self._error(ctx.CONTINUAR().getSymbol(),
                     "la sentencia 'continue' se usa fuera de un bucle (SEM07)")
             return self.visitChildren(ctx)
 
@@ -75,16 +75,16 @@ def crear_clase_visitor_semantico(ClaseVisitorGenerado, ClaseParserGenerado):
 
         def visitForStmt(self, ctx):
             self.visit(ctx.expr())
-            self.tabla_simbolos.definir_variable(ctx.NAME().getText())
+            self.tabla_simbolos.definir_variable(ctx.ID().getText())
             self.profundidad_bucle += 1
             self.visit(ctx.block())
             self.profundidad_bucle -= 1
             return None
 
         def visitFuncDef(self, ctx):
-            self.tabla_simbolos.apilar_ambito(ctx.NAME().getText())
+            self.tabla_simbolos.apilar_ambito(ctx.ID().getText())
             if ctx.paramList():
-                for token_nombre in ctx.paramList().NAME():
+                for token_nombre in ctx.paramList().ID():
                     self.tabla_simbolos.definir_variable(token_nombre.getText())
             self.profundidad_funcion += 1
             self.visit(ctx.block())
@@ -95,7 +95,7 @@ def crear_clase_visitor_semantico(ClaseVisitorGenerado, ClaseParserGenerado):
         def visitAtomExpr(self, ctx):
             atomo = ctx.atom()
             if isinstance(atomo, ClaseParserGenerado.NameAtomContext):
-                self._verificar_uso_variable(atomo.NAME().getText(), atomo.NAME().getSymbol())
+                self._verificar_uso_variable(atomo.ID().getText(), atomo.ID().getSymbol())
                 return None
             return self.visitChildren(ctx)
 
@@ -103,7 +103,7 @@ def crear_clase_visitor_semantico(ClaseVisitorGenerado, ClaseParserGenerado):
             invocado = ctx.expr()
             if isinstance(invocado, ClaseParserGenerado.AtomExprContext) and \
                isinstance(invocado.atom(), ClaseParserGenerado.NameAtomContext):
-                token_nombre = invocado.atom().NAME()
+                token_nombre = invocado.atom().ID()
                 self._verificar_llamada_funcion(token_nombre.getText(), token_nombre.getSymbol(), ctx)
             else:
                 self.visit(invocado)

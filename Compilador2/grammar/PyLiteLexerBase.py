@@ -29,7 +29,7 @@ class PyLiteLexerBase(Lexer):
         if token.type == Token.EOF:
             return self._manejar_fin_archivo(token)
 
-        if token.type == self.NEWLINE:
+        if token.type == self.NUEVA_LINEA:
             self._procesar_salto_linea(token)
             if self._tokens_pendientes:
                 return self._tokens_pendientes.pop(0)
@@ -58,23 +58,23 @@ class PyLiteLexerBase(Lexer):
         if ancho_indentacion > cima:
             self._indentaciones.append(ancho_indentacion)
             self._tokens_pendientes.append(
-                self._crear_token(self.INDENT, "<INDENT>", token))
+                self._crear_token(self.INDENTACION, "<INDENT>", token))
         else:
             while ancho_indentacion < self._indentaciones[-1]:
                 self._indentaciones.pop()
                 self._tokens_pendientes.append(
-                    self._crear_token(self.DEDENT, "<DEDENT>", token))
+                    self._crear_token(self.DESINDENTACION, "<DEDENT>", token))
 
     def _manejar_fin_archivo(self, token):
         if not self._fin_alcanzado:
             self._fin_alcanzado = True
-            if self._ultimo_token is not None and self._ultimo_token.type != self.NEWLINE:
+            if self._ultimo_token is not None and self._ultimo_token.type != self.NUEVA_LINEA:
                 self._tokens_pendientes.append(
-                    self._crear_token(self.NEWLINE, "\n", token))
+                    self._crear_token(self.NUEVA_LINEA, "\n", token))
             while len(self._indentaciones) > 1:
                 self._indentaciones.pop()
                 self._tokens_pendientes.append(
-                    self._crear_token(self.DEDENT, "<DEDENT>", token))
+                    self._crear_token(self.DESINDENTACION, "<DEDENT>", token))
             self._tokens_pendientes.append(token)
             return self._tokens_pendientes.pop(0)
         return token

@@ -16,19 +16,23 @@ public class PyLiteParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		INDENT=1, DEDENT=2, FALSE=3, AWAIT=4, ELSE=5, IMPORT=6, PASS=7, NONE=8, 
-		BREAK=9, EXCEPT=10, IN=11, RAISE=12, TRUE=13, CLASS=14, FINALLY=15, IS=16, 
-		RETURN=17, AND=18, CONTINUE=19, FOR=20, LAMBDA=21, TRY=22, AS=23, DEF=24, 
-		FROM=25, NONLOCAL=26, WHILE=27, ASSERT=28, DEL=29, GLOBAL=30, NOT=31, 
-		WITH=32, ASYNC=33, ELIF=34, IF=35, OR=36, YIELD=37, PLUS=38, MINUS=39, 
-		STAR=40, DOUBLESTAR=41, SLASH=42, DOUBLESLASH=43, PERCENT=44, EQ=45, NEQ=46, 
-		LE=47, GE=48, LT=49, GT=50, ASSIGN=51, PLUS_ASSIGN=52, MINUS_ASSIGN=53, 
-		STAR_ASSIGN=54, SLASH_ASSIGN=55, DSLASH_ASSIGN=56, PERCENT_ASSIGN=57, 
-		POWER_ASSIGN=58, AMP_ASSIGN=59, PIPE_ASSIGN=60, CARET_ASSIGN=61, RSHIFT_ASSIGN=62, 
-		LSHIFT_ASSIGN=63, WALRUS=64, AMP=65, PIPE=66, CARET=67, TILDE=68, LSHIFT=69, 
-		RSHIFT=70, LPAREN=71, RPAREN=72, LBRACKET=73, RBRACKET=74, LBRACE=75, 
-		RBRACE=76, COMMA=77, COLON=78, DOT=79, SEMI=80, AT=81, ARROW=82, ELLIPSIS=83, 
-		NAME=84, INT=85, FLOAT=86, STRING=87, COMMENT=88, WS=89, NEWLINE=90;
+		INDENTACION=1, DESINDENTACION=2, FALSO=3, ESPERAR=4, SINO=5, IMPORTAR=6, 
+		PASAR=7, NULO=8, ROMPER=9, EXCEPTO=10, EN=11, LANZAR=12, VERDADERO=13, 
+		CLASE=14, FINALMENTE=15, ES=16, RETORNAR=17, Y=18, CONTINUAR=19, PARA=20, 
+		LAMBDA=21, INTENTAR=22, COMO=23, DEFINIR=24, DESDE=25, NO_LOCAL=26, MIENTRAS=27, 
+		ASEGURAR=28, ELIMINAR=29, GLOBAL=30, NO=31, CON=32, ASINCRONO=33, SINO_SI=34, 
+		SI=35, O=36, CEDER=37, SUMA=38, RESTA=39, POR=40, POTENCIA=41, DIVISION=42, 
+		DIVISION_ENTERA=43, MODULO=44, IGUAL_QUE=45, DISTINTO_DE=46, MENOR_O_IGUAL_QUE=47, 
+		MAYOR_O_IGUAL_QUE=48, MENOR_QUE=49, MAYOR_QUE=50, IGUAL=51, IGUAL_SUMA=52, 
+		IGUAL_RESTA=53, IGUAL_POR=54, IGUAL_DIVISION=55, IGUAL_DIVISION_ENTERA=56, 
+		IGUAL_MODULO=57, IGUAL_POTENCIA=58, IGUAL_AND_BIT=59, IGUAL_OR_BIT=60, 
+		IGUAL_XOR_BIT=61, IGUAL_DESPLAZ_DER=62, IGUAL_DESPLAZ_IZQ=63, IGUAL_EN_EXPRESION=64, 
+		AND_BIT=65, OR_BIT=66, XOR_BIT=67, NEGACION_BIT=68, DESPLAZAMIENTO_IZQUIERDA=69, 
+		DESPLAZAMIENTO_DERECHA=70, PARENTESIS_IZQUIERDO=71, PARENTESIS_DERECHO=72, 
+		CORCHETE_IZQUIERDO=73, CORCHETE_DERECHO=74, LLAVE_IZQUIERDA=75, LLAVE_DERECHA=76, 
+		COMA=77, DOS_PUNTOS=78, PUNTO=79, PUNTO_Y_COMA=80, ARROBA=81, FLECHA=82, 
+		PUNTOS_SUSPENSIVOS=83, ID=84, ENTERO=85, FLOTANTE=86, CADENA=87, COMENTARIO=88, 
+		ESPACIOS=89, NUEVA_LINEA=90;
 	public static final int
 		RULE_program = 0, RULE_statement = 1, RULE_simpleStmt = 2, RULE_smallStmt = 3, 
 		RULE_assignStmt = 4, RULE_assignOp = 5, RULE_exprStmt = 6, RULE_returnStmt = 7, 
@@ -62,19 +66,22 @@ public class PyLiteParser extends Parser {
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "INDENT", "DEDENT", "FALSE", "AWAIT", "ELSE", "IMPORT", "PASS", 
-			"NONE", "BREAK", "EXCEPT", "IN", "RAISE", "TRUE", "CLASS", "FINALLY", 
-			"IS", "RETURN", "AND", "CONTINUE", "FOR", "LAMBDA", "TRY", "AS", "DEF", 
-			"FROM", "NONLOCAL", "WHILE", "ASSERT", "DEL", "GLOBAL", "NOT", "WITH", 
-			"ASYNC", "ELIF", "IF", "OR", "YIELD", "PLUS", "MINUS", "STAR", "DOUBLESTAR", 
-			"SLASH", "DOUBLESLASH", "PERCENT", "EQ", "NEQ", "LE", "GE", "LT", "GT", 
-			"ASSIGN", "PLUS_ASSIGN", "MINUS_ASSIGN", "STAR_ASSIGN", "SLASH_ASSIGN", 
-			"DSLASH_ASSIGN", "PERCENT_ASSIGN", "POWER_ASSIGN", "AMP_ASSIGN", "PIPE_ASSIGN", 
-			"CARET_ASSIGN", "RSHIFT_ASSIGN", "LSHIFT_ASSIGN", "WALRUS", "AMP", "PIPE", 
-			"CARET", "TILDE", "LSHIFT", "RSHIFT", "LPAREN", "RPAREN", "LBRACKET", 
-			"RBRACKET", "LBRACE", "RBRACE", "COMMA", "COLON", "DOT", "SEMI", "AT", 
-			"ARROW", "ELLIPSIS", "NAME", "INT", "FLOAT", "STRING", "COMMENT", "WS", 
-			"NEWLINE"
+			null, "INDENTACION", "DESINDENTACION", "FALSO", "ESPERAR", "SINO", "IMPORTAR", 
+			"PASAR", "NULO", "ROMPER", "EXCEPTO", "EN", "LANZAR", "VERDADERO", "CLASE", 
+			"FINALMENTE", "ES", "RETORNAR", "Y", "CONTINUAR", "PARA", "LAMBDA", "INTENTAR", 
+			"COMO", "DEFINIR", "DESDE", "NO_LOCAL", "MIENTRAS", "ASEGURAR", "ELIMINAR", 
+			"GLOBAL", "NO", "CON", "ASINCRONO", "SINO_SI", "SI", "O", "CEDER", "SUMA", 
+			"RESTA", "POR", "POTENCIA", "DIVISION", "DIVISION_ENTERA", "MODULO", 
+			"IGUAL_QUE", "DISTINTO_DE", "MENOR_O_IGUAL_QUE", "MAYOR_O_IGUAL_QUE", 
+			"MENOR_QUE", "MAYOR_QUE", "IGUAL", "IGUAL_SUMA", "IGUAL_RESTA", "IGUAL_POR", 
+			"IGUAL_DIVISION", "IGUAL_DIVISION_ENTERA", "IGUAL_MODULO", "IGUAL_POTENCIA", 
+			"IGUAL_AND_BIT", "IGUAL_OR_BIT", "IGUAL_XOR_BIT", "IGUAL_DESPLAZ_DER", 
+			"IGUAL_DESPLAZ_IZQ", "IGUAL_EN_EXPRESION", "AND_BIT", "OR_BIT", "XOR_BIT", 
+			"NEGACION_BIT", "DESPLAZAMIENTO_IZQUIERDA", "DESPLAZAMIENTO_DERECHA", 
+			"PARENTESIS_IZQUIERDO", "PARENTESIS_DERECHO", "CORCHETE_IZQUIERDO", "CORCHETE_DERECHO", 
+			"LLAVE_IZQUIERDA", "LLAVE_DERECHA", "COMA", "DOS_PUNTOS", "PUNTO", "PUNTO_Y_COMA", 
+			"ARROBA", "FLECHA", "PUNTOS_SUSPENSIVOS", "ID", "ENTERO", "FLOTANTE", 
+			"CADENA", "COMENTARIO", "ESPACIOS", "NUEVA_LINEA"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -131,9 +138,9 @@ public class PyLiteParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class ProgramContext extends ParserRuleContext {
 		public TerminalNode EOF() { return getToken(PyLiteParser.EOF, 0); }
-		public List<TerminalNode> NEWLINE() { return getTokens(PyLiteParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(PyLiteParser.NEWLINE, i);
+		public List<TerminalNode> NUEVA_LINEA() { return getTokens(PyLiteParser.NUEVA_LINEA); }
+		public TerminalNode NUEVA_LINEA(int i) {
+			return getToken(PyLiteParser.NUEVA_LINEA, i);
 		}
 		public List<StatementContext> statement() {
 			return getRuleContexts(StatementContext.class);
@@ -157,11 +164,11 @@ public class PyLiteParser extends Parser {
 			setState(39);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==NEWLINE) {
+			while (_la==NUEVA_LINEA) {
 				{
 				{
 				setState(36);
-				match(NEWLINE);
+				match(NUEVA_LINEA);
 				}
 				}
 				setState(41);
@@ -218,31 +225,31 @@ public class PyLiteParser extends Parser {
 			setState(52);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case FALSE:
-			case PASS:
-			case NONE:
-			case BREAK:
-			case TRUE:
-			case RETURN:
-			case CONTINUE:
-			case NOT:
-			case PLUS:
-			case MINUS:
-			case LPAREN:
-			case NAME:
-			case INT:
-			case FLOAT:
-			case STRING:
+			case FALSO:
+			case PASAR:
+			case NULO:
+			case ROMPER:
+			case VERDADERO:
+			case RETORNAR:
+			case CONTINUAR:
+			case NO:
+			case SUMA:
+			case RESTA:
+			case PARENTESIS_IZQUIERDO:
+			case ID:
+			case ENTERO:
+			case FLOTANTE:
+			case CADENA:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(50);
 				simpleStmt();
 				}
 				break;
-			case FOR:
-			case DEF:
-			case WHILE:
-			case IF:
+			case PARA:
+			case DEFINIR:
+			case MIENTRAS:
+			case SI:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(51);
@@ -272,10 +279,10 @@ public class PyLiteParser extends Parser {
 		public SmallStmtContext smallStmt(int i) {
 			return getRuleContext(SmallStmtContext.class,i);
 		}
-		public TerminalNode NEWLINE() { return getToken(PyLiteParser.NEWLINE, 0); }
-		public List<TerminalNode> SEMI() { return getTokens(PyLiteParser.SEMI); }
-		public TerminalNode SEMI(int i) {
-			return getToken(PyLiteParser.SEMI, i);
+		public TerminalNode NUEVA_LINEA() { return getToken(PyLiteParser.NUEVA_LINEA, 0); }
+		public List<TerminalNode> PUNTO_Y_COMA() { return getTokens(PyLiteParser.PUNTO_Y_COMA); }
+		public TerminalNode PUNTO_Y_COMA(int i) {
+			return getToken(PyLiteParser.PUNTO_Y_COMA, i);
 		}
 		public SimpleStmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -301,7 +308,7 @@ public class PyLiteParser extends Parser {
 					{
 					{
 					setState(55);
-					match(SEMI);
+					match(PUNTO_Y_COMA);
 					setState(56);
 					smallStmt();
 					}
@@ -314,15 +321,15 @@ public class PyLiteParser extends Parser {
 			setState(63);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==SEMI) {
+			if (_la==PUNTO_Y_COMA) {
 				{
 				setState(62);
-				match(SEMI);
+				match(PUNTO_Y_COMA);
 				}
 			}
 
 			setState(65);
-			match(NEWLINE);
+			match(NUEVA_LINEA);
 			}
 		}
 		catch (RecognitionException re) {
@@ -347,9 +354,9 @@ public class PyLiteParser extends Parser {
 		public ReturnStmtContext returnStmt() {
 			return getRuleContext(ReturnStmtContext.class,0);
 		}
-		public TerminalNode PASS() { return getToken(PyLiteParser.PASS, 0); }
-		public TerminalNode BREAK() { return getToken(PyLiteParser.BREAK, 0); }
-		public TerminalNode CONTINUE() { return getToken(PyLiteParser.CONTINUE, 0); }
+		public TerminalNode PASAR() { return getToken(PyLiteParser.PASAR, 0); }
+		public TerminalNode ROMPER() { return getToken(PyLiteParser.ROMPER, 0); }
+		public TerminalNode CONTINUAR() { return getToken(PyLiteParser.CONTINUAR, 0); }
 		public SmallStmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -388,21 +395,21 @@ public class PyLiteParser extends Parser {
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(70);
-				match(PASS);
+				match(PASAR);
 				}
 				break;
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(71);
-				match(BREAK);
+				match(ROMPER);
 				}
 				break;
 			case 6:
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(72);
-				match(CONTINUE);
+				match(CONTINUAR);
 				}
 				break;
 			}
@@ -420,7 +427,7 @@ public class PyLiteParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class AssignStmtContext extends ParserRuleContext {
-		public TerminalNode NAME() { return getToken(PyLiteParser.NAME, 0); }
+		public TerminalNode ID() { return getToken(PyLiteParser.ID, 0); }
 		public AssignOpContext assignOp() {
 			return getRuleContext(AssignOpContext.class,0);
 		}
@@ -440,7 +447,7 @@ public class PyLiteParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(75);
-			match(NAME);
+			match(ID);
 			setState(76);
 			assignOp();
 			setState(77);
@@ -460,11 +467,11 @@ public class PyLiteParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class AssignOpContext extends ParserRuleContext {
-		public TerminalNode ASSIGN() { return getToken(PyLiteParser.ASSIGN, 0); }
-		public TerminalNode PLUS_ASSIGN() { return getToken(PyLiteParser.PLUS_ASSIGN, 0); }
-		public TerminalNode MINUS_ASSIGN() { return getToken(PyLiteParser.MINUS_ASSIGN, 0); }
-		public TerminalNode STAR_ASSIGN() { return getToken(PyLiteParser.STAR_ASSIGN, 0); }
-		public TerminalNode SLASH_ASSIGN() { return getToken(PyLiteParser.SLASH_ASSIGN, 0); }
+		public TerminalNode IGUAL() { return getToken(PyLiteParser.IGUAL, 0); }
+		public TerminalNode IGUAL_SUMA() { return getToken(PyLiteParser.IGUAL_SUMA, 0); }
+		public TerminalNode IGUAL_RESTA() { return getToken(PyLiteParser.IGUAL_RESTA, 0); }
+		public TerminalNode IGUAL_POR() { return getToken(PyLiteParser.IGUAL_POR, 0); }
+		public TerminalNode IGUAL_DIVISION() { return getToken(PyLiteParser.IGUAL_DIVISION, 0); }
 		public AssignOpContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -535,7 +542,7 @@ public class PyLiteParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ReturnStmtContext extends ParserRuleContext {
-		public TerminalNode RETURN() { return getToken(PyLiteParser.RETURN, 0); }
+		public TerminalNode RETORNAR() { return getToken(PyLiteParser.RETORNAR, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
@@ -553,7 +560,7 @@ public class PyLiteParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(83);
-			match(RETURN);
+			match(RETORNAR);
 			setState(85);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -604,28 +611,28 @@ public class PyLiteParser extends Parser {
 			setState(91);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case IF:
+			case SI:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(87);
 				ifStmt();
 				}
 				break;
-			case WHILE:
+			case MIENTRAS:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(88);
 				whileStmt();
 				}
 				break;
-			case FOR:
+			case PARA:
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(89);
 				forStmt();
 				}
 				break;
-			case DEF:
+			case DEFINIR:
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(90);
@@ -649,16 +656,16 @@ public class PyLiteParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class IfStmtContext extends ParserRuleContext {
-		public TerminalNode IF() { return getToken(PyLiteParser.IF, 0); }
+		public TerminalNode SI() { return getToken(PyLiteParser.SI, 0); }
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
 		}
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public List<TerminalNode> COLON() { return getTokens(PyLiteParser.COLON); }
-		public TerminalNode COLON(int i) {
-			return getToken(PyLiteParser.COLON, i);
+		public List<TerminalNode> DOS_PUNTOS() { return getTokens(PyLiteParser.DOS_PUNTOS); }
+		public TerminalNode DOS_PUNTOS(int i) {
+			return getToken(PyLiteParser.DOS_PUNTOS, i);
 		}
 		public List<BlockContext> block() {
 			return getRuleContexts(BlockContext.class);
@@ -666,11 +673,11 @@ public class PyLiteParser extends Parser {
 		public BlockContext block(int i) {
 			return getRuleContext(BlockContext.class,i);
 		}
-		public List<TerminalNode> ELIF() { return getTokens(PyLiteParser.ELIF); }
-		public TerminalNode ELIF(int i) {
-			return getToken(PyLiteParser.ELIF, i);
+		public List<TerminalNode> SINO_SI() { return getTokens(PyLiteParser.SINO_SI); }
+		public TerminalNode SINO_SI(int i) {
+			return getToken(PyLiteParser.SINO_SI, i);
 		}
-		public TerminalNode ELSE() { return getToken(PyLiteParser.ELSE, 0); }
+		public TerminalNode SINO() { return getToken(PyLiteParser.SINO, 0); }
 		public IfStmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -685,25 +692,25 @@ public class PyLiteParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(93);
-			match(IF);
+			match(SI);
 			setState(94);
 			expr(0);
 			setState(95);
-			match(COLON);
+			match(DOS_PUNTOS);
 			setState(96);
 			block();
 			setState(104);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==ELIF) {
+			while (_la==SINO_SI) {
 				{
 				{
 				setState(97);
-				match(ELIF);
+				match(SINO_SI);
 				setState(98);
 				expr(0);
 				setState(99);
-				match(COLON);
+				match(DOS_PUNTOS);
 				setState(100);
 				block();
 				}
@@ -715,12 +722,12 @@ public class PyLiteParser extends Parser {
 			setState(110);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==ELSE) {
+			if (_la==SINO) {
 				{
 				setState(107);
-				match(ELSE);
+				match(SINO);
 				setState(108);
-				match(COLON);
+				match(DOS_PUNTOS);
 				setState(109);
 				block();
 				}
@@ -741,11 +748,11 @@ public class PyLiteParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class WhileStmtContext extends ParserRuleContext {
-		public TerminalNode WHILE() { return getToken(PyLiteParser.WHILE, 0); }
+		public TerminalNode MIENTRAS() { return getToken(PyLiteParser.MIENTRAS, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode COLON() { return getToken(PyLiteParser.COLON, 0); }
+		public TerminalNode DOS_PUNTOS() { return getToken(PyLiteParser.DOS_PUNTOS, 0); }
 		public BlockContext block() {
 			return getRuleContext(BlockContext.class,0);
 		}
@@ -762,11 +769,11 @@ public class PyLiteParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(112);
-			match(WHILE);
+			match(MIENTRAS);
 			setState(113);
 			expr(0);
 			setState(114);
-			match(COLON);
+			match(DOS_PUNTOS);
 			setState(115);
 			block();
 			}
@@ -784,13 +791,13 @@ public class PyLiteParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ForStmtContext extends ParserRuleContext {
-		public TerminalNode FOR() { return getToken(PyLiteParser.FOR, 0); }
-		public TerminalNode NAME() { return getToken(PyLiteParser.NAME, 0); }
-		public TerminalNode IN() { return getToken(PyLiteParser.IN, 0); }
+		public TerminalNode PARA() { return getToken(PyLiteParser.PARA, 0); }
+		public TerminalNode ID() { return getToken(PyLiteParser.ID, 0); }
+		public TerminalNode EN() { return getToken(PyLiteParser.EN, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode COLON() { return getToken(PyLiteParser.COLON, 0); }
+		public TerminalNode DOS_PUNTOS() { return getToken(PyLiteParser.DOS_PUNTOS, 0); }
 		public BlockContext block() {
 			return getRuleContext(BlockContext.class,0);
 		}
@@ -807,15 +814,15 @@ public class PyLiteParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(117);
-			match(FOR);
+			match(PARA);
 			setState(118);
-			match(NAME);
+			match(ID);
 			setState(119);
-			match(IN);
+			match(EN);
 			setState(120);
 			expr(0);
 			setState(121);
-			match(COLON);
+			match(DOS_PUNTOS);
 			setState(122);
 			block();
 			}
@@ -833,11 +840,11 @@ public class PyLiteParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class FuncDefContext extends ParserRuleContext {
-		public TerminalNode DEF() { return getToken(PyLiteParser.DEF, 0); }
-		public TerminalNode NAME() { return getToken(PyLiteParser.NAME, 0); }
-		public TerminalNode LPAREN() { return getToken(PyLiteParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(PyLiteParser.RPAREN, 0); }
-		public TerminalNode COLON() { return getToken(PyLiteParser.COLON, 0); }
+		public TerminalNode DEFINIR() { return getToken(PyLiteParser.DEFINIR, 0); }
+		public TerminalNode ID() { return getToken(PyLiteParser.ID, 0); }
+		public TerminalNode PARENTESIS_IZQUIERDO() { return getToken(PyLiteParser.PARENTESIS_IZQUIERDO, 0); }
+		public TerminalNode PARENTESIS_DERECHO() { return getToken(PyLiteParser.PARENTESIS_DERECHO, 0); }
+		public TerminalNode DOS_PUNTOS() { return getToken(PyLiteParser.DOS_PUNTOS, 0); }
 		public BlockContext block() {
 			return getRuleContext(BlockContext.class,0);
 		}
@@ -858,15 +865,15 @@ public class PyLiteParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(124);
-			match(DEF);
+			match(DEFINIR);
 			setState(125);
-			match(NAME);
+			match(ID);
 			setState(126);
-			match(LPAREN);
+			match(PARENTESIS_IZQUIERDO);
 			setState(128);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==NAME) {
+			if (_la==ID) {
 				{
 				setState(127);
 				paramList();
@@ -874,9 +881,9 @@ public class PyLiteParser extends Parser {
 			}
 
 			setState(130);
-			match(RPAREN);
+			match(PARENTESIS_DERECHO);
 			setState(131);
-			match(COLON);
+			match(DOS_PUNTOS);
 			setState(132);
 			block();
 			}
@@ -894,13 +901,13 @@ public class PyLiteParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ParamListContext extends ParserRuleContext {
-		public List<TerminalNode> NAME() { return getTokens(PyLiteParser.NAME); }
-		public TerminalNode NAME(int i) {
-			return getToken(PyLiteParser.NAME, i);
+		public List<TerminalNode> ID() { return getTokens(PyLiteParser.ID); }
+		public TerminalNode ID(int i) {
+			return getToken(PyLiteParser.ID, i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(PyLiteParser.COMMA); }
-		public TerminalNode COMMA(int i) {
-			return getToken(PyLiteParser.COMMA, i);
+		public List<TerminalNode> COMA() { return getTokens(PyLiteParser.COMA); }
+		public TerminalNode COMA(int i) {
+			return getToken(PyLiteParser.COMA, i);
 		}
 		public ParamListContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -916,17 +923,17 @@ public class PyLiteParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(134);
-			match(NAME);
+			match(ID);
 			setState(139);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==COMMA) {
+			while (_la==COMA) {
 				{
 				{
 				setState(135);
-				match(COMMA);
+				match(COMA);
 				setState(136);
-				match(NAME);
+				match(ID);
 				}
 				}
 				setState(141);
@@ -948,9 +955,9 @@ public class PyLiteParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class BlockContext extends ParserRuleContext {
-		public TerminalNode NEWLINE() { return getToken(PyLiteParser.NEWLINE, 0); }
-		public TerminalNode INDENT() { return getToken(PyLiteParser.INDENT, 0); }
-		public TerminalNode DEDENT() { return getToken(PyLiteParser.DEDENT, 0); }
+		public TerminalNode NUEVA_LINEA() { return getToken(PyLiteParser.NUEVA_LINEA, 0); }
+		public TerminalNode INDENTACION() { return getToken(PyLiteParser.INDENTACION, 0); }
+		public TerminalNode DESINDENTACION() { return getToken(PyLiteParser.DESINDENTACION, 0); }
 		public List<StatementContext> statement() {
 			return getRuleContexts(StatementContext.class);
 		}
@@ -974,13 +981,13 @@ public class PyLiteParser extends Parser {
 			setState(152);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case NEWLINE:
+			case NUEVA_LINEA:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(142);
-				match(NEWLINE);
+				match(NUEVA_LINEA);
 				setState(143);
-				match(INDENT);
+				match(INDENTACION);
 				setState(145); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -996,24 +1003,24 @@ public class PyLiteParser extends Parser {
 					_la = _input.LA(1);
 				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 861293650824L) != 0) || ((((_la - 71)) & ~0x3f) == 0 && ((1L << (_la - 71)) & 122881L) != 0) );
 				setState(149);
-				match(DEDENT);
+				match(DESINDENTACION);
 				}
 				break;
-			case FALSE:
-			case PASS:
-			case NONE:
-			case BREAK:
-			case TRUE:
-			case RETURN:
-			case CONTINUE:
-			case NOT:
-			case PLUS:
-			case MINUS:
-			case LPAREN:
-			case NAME:
-			case INT:
-			case FLOAT:
-			case STRING:
+			case FALSO:
+			case PASAR:
+			case NULO:
+			case ROMPER:
+			case VERDADERO:
+			case RETORNAR:
+			case CONTINUAR:
+			case NO:
+			case SUMA:
+			case RESTA:
+			case PARENTESIS_IZQUIERDO:
+			case ID:
+			case ENTERO:
+			case FLOTANTE:
+			case CADENA:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(151);
@@ -1055,8 +1062,8 @@ public class PyLiteParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode LBRACKET() { return getToken(PyLiteParser.LBRACKET, 0); }
-		public TerminalNode RBRACKET() { return getToken(PyLiteParser.RBRACKET, 0); }
+		public TerminalNode CORCHETE_IZQUIERDO() { return getToken(PyLiteParser.CORCHETE_IZQUIERDO, 0); }
+		public TerminalNode CORCHETE_DERECHO() { return getToken(PyLiteParser.CORCHETE_DERECHO, 0); }
 		public IndexExprContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -1064,13 +1071,13 @@ public class PyLiteParser extends Parser {
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode PLUS() { return getToken(PyLiteParser.PLUS, 0); }
-		public TerminalNode MINUS() { return getToken(PyLiteParser.MINUS, 0); }
+		public TerminalNode SUMA() { return getToken(PyLiteParser.SUMA, 0); }
+		public TerminalNode RESTA() { return getToken(PyLiteParser.RESTA, 0); }
 		public UnaryExprContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class NotExprContext extends ExprContext {
-		public TerminalNode NOT() { return getToken(PyLiteParser.NOT, 0); }
+		public TerminalNode NO() { return getToken(PyLiteParser.NO, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
@@ -1084,9 +1091,9 @@ public class PyLiteParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public List<TerminalNode> STAR() { return getTokens(PyLiteParser.STAR); }
-		public TerminalNode STAR(int i) {
-			return getToken(PyLiteParser.STAR, i);
+		public List<TerminalNode> POR() { return getTokens(PyLiteParser.POR); }
+		public TerminalNode POR(int i) {
+			return getToken(PyLiteParser.POR, i);
 		}
 		public PowerExprContext(ExprContext ctx) { copyFrom(ctx); }
 	}
@@ -1098,8 +1105,8 @@ public class PyLiteParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode PLUS() { return getToken(PyLiteParser.PLUS, 0); }
-		public TerminalNode MINUS() { return getToken(PyLiteParser.MINUS, 0); }
+		public TerminalNode SUMA() { return getToken(PyLiteParser.SUMA, 0); }
+		public TerminalNode RESTA() { return getToken(PyLiteParser.RESTA, 0); }
 		public AddExprContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -1110,10 +1117,10 @@ public class PyLiteParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode STAR() { return getToken(PyLiteParser.STAR, 0); }
-		public TerminalNode SLASH() { return getToken(PyLiteParser.SLASH, 0); }
-		public TerminalNode DOUBLESLASH() { return getToken(PyLiteParser.DOUBLESLASH, 0); }
-		public TerminalNode PERCENT() { return getToken(PyLiteParser.PERCENT, 0); }
+		public TerminalNode POR() { return getToken(PyLiteParser.POR, 0); }
+		public TerminalNode DIVISION() { return getToken(PyLiteParser.DIVISION, 0); }
+		public TerminalNode DIVISION_ENTERA() { return getToken(PyLiteParser.DIVISION_ENTERA, 0); }
+		public TerminalNode MODULO() { return getToken(PyLiteParser.MODULO, 0); }
 		public MulExprContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -1131,7 +1138,7 @@ public class PyLiteParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode OR() { return getToken(PyLiteParser.OR, 0); }
+		public TerminalNode O() { return getToken(PyLiteParser.O, 0); }
 		public OrExprContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -1139,8 +1146,8 @@ public class PyLiteParser extends Parser {
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode LPAREN() { return getToken(PyLiteParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(PyLiteParser.RPAREN, 0); }
+		public TerminalNode PARENTESIS_IZQUIERDO() { return getToken(PyLiteParser.PARENTESIS_IZQUIERDO, 0); }
+		public TerminalNode PARENTESIS_DERECHO() { return getToken(PyLiteParser.PARENTESIS_DERECHO, 0); }
 		public ArgListContext argList() {
 			return getRuleContext(ArgListContext.class,0);
 		}
@@ -1154,12 +1161,12 @@ public class PyLiteParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode EQ() { return getToken(PyLiteParser.EQ, 0); }
-		public TerminalNode NEQ() { return getToken(PyLiteParser.NEQ, 0); }
-		public TerminalNode LT() { return getToken(PyLiteParser.LT, 0); }
-		public TerminalNode GT() { return getToken(PyLiteParser.GT, 0); }
-		public TerminalNode LE() { return getToken(PyLiteParser.LE, 0); }
-		public TerminalNode GE() { return getToken(PyLiteParser.GE, 0); }
+		public TerminalNode IGUAL_QUE() { return getToken(PyLiteParser.IGUAL_QUE, 0); }
+		public TerminalNode DISTINTO_DE() { return getToken(PyLiteParser.DISTINTO_DE, 0); }
+		public TerminalNode MENOR_QUE() { return getToken(PyLiteParser.MENOR_QUE, 0); }
+		public TerminalNode MAYOR_QUE() { return getToken(PyLiteParser.MAYOR_QUE, 0); }
+		public TerminalNode MENOR_O_IGUAL_QUE() { return getToken(PyLiteParser.MENOR_O_IGUAL_QUE, 0); }
+		public TerminalNode MAYOR_O_IGUAL_QUE() { return getToken(PyLiteParser.MAYOR_O_IGUAL_QUE, 0); }
 		public CompareExprContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -1170,7 +1177,7 @@ public class PyLiteParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode AND() { return getToken(PyLiteParser.AND, 0); }
+		public TerminalNode Y() { return getToken(PyLiteParser.Y, 0); }
 		public AndExprContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 
@@ -1193,8 +1200,8 @@ public class PyLiteParser extends Parser {
 			setState(160);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case PLUS:
-			case MINUS:
+			case SUMA:
+			case RESTA:
 				{
 				_localctx = new UnaryExprContext(_localctx);
 				_ctx = _localctx;
@@ -1202,7 +1209,7 @@ public class PyLiteParser extends Parser {
 
 				setState(155);
 				_la = _input.LA(1);
-				if ( !(_la==PLUS || _la==MINUS) ) {
+				if ( !(_la==SUMA || _la==RESTA) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1214,25 +1221,25 @@ public class PyLiteParser extends Parser {
 				expr(8);
 				}
 				break;
-			case NOT:
+			case NO:
 				{
 				_localctx = new NotExprContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(157);
-				match(NOT);
+				match(NO);
 				setState(158);
 				expr(4);
 				}
 				break;
-			case FALSE:
-			case NONE:
-			case TRUE:
-			case LPAREN:
-			case NAME:
-			case INT:
-			case FLOAT:
-			case STRING:
+			case FALSO:
+			case NULO:
+			case VERDADERO:
+			case PARENTESIS_IZQUIERDO:
+			case ID:
+			case ENTERO:
+			case FLOTANTE:
+			case CADENA:
 				{
 				_localctx = new AtomExprContext(_localctx);
 				_ctx = _localctx;
@@ -1263,9 +1270,9 @@ public class PyLiteParser extends Parser {
 						setState(162);
 						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
 						setState(163);
-						match(STAR);
+						match(POR);
 						setState(164);
-						match(STAR);
+						match(POR);
 						setState(165);
 						expr(9);
 						}
@@ -1298,7 +1305,7 @@ public class PyLiteParser extends Parser {
 						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
 						setState(170);
 						_la = _input.LA(1);
-						if ( !(_la==PLUS || _la==MINUS) ) {
+						if ( !(_la==SUMA || _la==RESTA) ) {
 						_errHandler.recoverInline(this);
 						}
 						else {
@@ -1337,7 +1344,7 @@ public class PyLiteParser extends Parser {
 						setState(175);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
 						setState(176);
-						match(AND);
+						match(Y);
 						setState(177);
 						expr(4);
 						}
@@ -1349,7 +1356,7 @@ public class PyLiteParser extends Parser {
 						setState(178);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
 						setState(179);
-						match(OR);
+						match(O);
 						setState(180);
 						expr(3);
 						}
@@ -1361,7 +1368,7 @@ public class PyLiteParser extends Parser {
 						setState(181);
 						if (!(precpred(_ctx, 11))) throw new FailedPredicateException(this, "precpred(_ctx, 11)");
 						setState(182);
-						match(LPAREN);
+						match(PARENTESIS_IZQUIERDO);
 						setState(184);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
@@ -1373,7 +1380,7 @@ public class PyLiteParser extends Parser {
 						}
 
 						setState(186);
-						match(RPAREN);
+						match(PARENTESIS_DERECHO);
 						}
 						break;
 					case 8:
@@ -1383,11 +1390,11 @@ public class PyLiteParser extends Parser {
 						setState(187);
 						if (!(precpred(_ctx, 10))) throw new FailedPredicateException(this, "precpred(_ctx, 10)");
 						setState(188);
-						match(LBRACKET);
+						match(CORCHETE_IZQUIERDO);
 						setState(189);
 						expr(0);
 						setState(190);
-						match(RBRACKET);
+						match(CORCHETE_DERECHO);
 						}
 						break;
 					}
@@ -1418,9 +1425,9 @@ public class PyLiteParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(PyLiteParser.COMMA); }
-		public TerminalNode COMMA(int i) {
-			return getToken(PyLiteParser.COMMA, i);
+		public List<TerminalNode> COMA() { return getTokens(PyLiteParser.COMA); }
+		public TerminalNode COMA(int i) {
+			return getToken(PyLiteParser.COMA, i);
 		}
 		public ArgListContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1440,11 +1447,11 @@ public class PyLiteParser extends Parser {
 			setState(202);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==COMMA) {
+			while (_la==COMA) {
 				{
 				{
 				setState(198);
-				match(COMMA);
+				match(COMA);
 				setState(199);
 				expr(0);
 				}
@@ -1480,46 +1487,46 @@ public class PyLiteParser extends Parser {
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class NameAtomContext extends AtomContext {
-		public TerminalNode NAME() { return getToken(PyLiteParser.NAME, 0); }
+		public TerminalNode ID() { return getToken(PyLiteParser.ID, 0); }
 		public NameAtomContext(AtomContext ctx) { copyFrom(ctx); }
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class NoneAtomContext extends AtomContext {
-		public TerminalNode NONE() { return getToken(PyLiteParser.NONE, 0); }
+		public TerminalNode NULO() { return getToken(PyLiteParser.NULO, 0); }
 		public NoneAtomContext(AtomContext ctx) { copyFrom(ctx); }
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class FloatAtomContext extends AtomContext {
-		public TerminalNode FLOAT() { return getToken(PyLiteParser.FLOAT, 0); }
+		public TerminalNode FLOTANTE() { return getToken(PyLiteParser.FLOTANTE, 0); }
 		public FloatAtomContext(AtomContext ctx) { copyFrom(ctx); }
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ParenAtomContext extends AtomContext {
-		public TerminalNode LPAREN() { return getToken(PyLiteParser.LPAREN, 0); }
+		public TerminalNode PARENTESIS_IZQUIERDO() { return getToken(PyLiteParser.PARENTESIS_IZQUIERDO, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(PyLiteParser.RPAREN, 0); }
+		public TerminalNode PARENTESIS_DERECHO() { return getToken(PyLiteParser.PARENTESIS_DERECHO, 0); }
 		public ParenAtomContext(AtomContext ctx) { copyFrom(ctx); }
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class IntAtomContext extends AtomContext {
-		public TerminalNode INT() { return getToken(PyLiteParser.INT, 0); }
+		public TerminalNode ENTERO() { return getToken(PyLiteParser.ENTERO, 0); }
 		public IntAtomContext(AtomContext ctx) { copyFrom(ctx); }
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class StringAtomContext extends AtomContext {
-		public TerminalNode STRING() { return getToken(PyLiteParser.STRING, 0); }
+		public TerminalNode CADENA() { return getToken(PyLiteParser.CADENA, 0); }
 		public StringAtomContext(AtomContext ctx) { copyFrom(ctx); }
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class FalseAtomContext extends AtomContext {
-		public TerminalNode FALSE() { return getToken(PyLiteParser.FALSE, 0); }
+		public TerminalNode FALSO() { return getToken(PyLiteParser.FALSO, 0); }
 		public FalseAtomContext(AtomContext ctx) { copyFrom(ctx); }
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class TrueAtomContext extends AtomContext {
-		public TerminalNode TRUE() { return getToken(PyLiteParser.TRUE, 0); }
+		public TerminalNode VERDADERO() { return getToken(PyLiteParser.VERDADERO, 0); }
 		public TrueAtomContext(AtomContext ctx) { copyFrom(ctx); }
 	}
 
@@ -1530,72 +1537,72 @@ public class PyLiteParser extends Parser {
 			setState(216);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case NAME:
+			case ID:
 				_localctx = new NameAtomContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(205);
-				match(NAME);
+				match(ID);
 				}
 				break;
-			case INT:
+			case ENTERO:
 				_localctx = new IntAtomContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(206);
-				match(INT);
+				match(ENTERO);
 				}
 				break;
-			case FLOAT:
+			case FLOTANTE:
 				_localctx = new FloatAtomContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(207);
-				match(FLOAT);
+				match(FLOTANTE);
 				}
 				break;
-			case STRING:
+			case CADENA:
 				_localctx = new StringAtomContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(208);
-				match(STRING);
+				match(CADENA);
 				}
 				break;
-			case TRUE:
+			case VERDADERO:
 				_localctx = new TrueAtomContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(209);
-				match(TRUE);
+				match(VERDADERO);
 				}
 				break;
-			case FALSE:
+			case FALSO:
 				_localctx = new FalseAtomContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(210);
-				match(FALSE);
+				match(FALSO);
 				}
 				break;
-			case NONE:
+			case NULO:
 				_localctx = new NoneAtomContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
 				setState(211);
-				match(NONE);
+				match(NULO);
 				}
 				break;
-			case LPAREN:
+			case PARENTESIS_IZQUIERDO:
 				_localctx = new ParenAtomContext(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
 				setState(212);
-				match(LPAREN);
+				match(PARENTESIS_IZQUIERDO);
 				setState(213);
 				expr(0);
 				setState(214);
-				match(RPAREN);
+				match(PARENTESIS_DERECHO);
 				}
 				break;
 			default:

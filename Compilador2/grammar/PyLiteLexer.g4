@@ -1,114 +1,114 @@
 lexer grammar PyLiteLexer;
-tokens { INDENT, DEDENT }
+tokens { INDENTACION, DESINDENTACION }
 
 options {
     superClass = PyLiteLexerBase;
 }
 // Palabras reservadas 
-FALSE    : 'False';
-AWAIT    : 'await';
-ELSE     : 'else';
-IMPORT   : 'import';
-PASS     : 'pass';
-NONE     : 'None';
-BREAK    : 'break';
-EXCEPT   : 'except';
-IN       : 'in';
-RAISE    : 'raise';
-TRUE     : 'True';
-CLASS    : 'class';
-FINALLY  : 'finally';
-IS       : 'is';
-RETURN   : 'return';
-AND      : 'and';
+FALSE : 'False';
+AWAIT : 'await';
+ELSE : 'else';
+IMPORT : 'import';
+PASS : 'pass';
+NONE : 'None';
+BREAK : 'break';
+EXCEPT : 'except';
+IN : 'in';
+RAISE : 'raise';
+TRUE : 'True';
+CLASS : 'class';
+FINALLY : 'finally';
+IS : 'is';
+RETURN : 'return';
+AND : 'and';
 CONTINUE : 'continue';
-FOR      : 'for';
-LAMBDA   : 'lambda';
-TRY      : 'try';
-AS       : 'as';
-DEF      : 'def';
-FROM     : 'from';
+FOR : 'for';
+LAMBDA     : 'lambda';
+TRY : 'try';
+AS : 'as';
+DEF : 'def';
+FROM : 'from';
 NONLOCAL : 'nonlocal';
-WHILE    : 'while';
-ASSERT   : 'assert';
-DEL      : 'del';
-GLOBAL   : 'global';
-NOT      : 'not';
-WITH     : 'with';
-ASYNC    : 'async';
-ELIF     : 'elif';
-IF       : 'if';
-OR       : 'or';
-YIELD    : 'yield';
+WHILE : 'while';
+ASSERT: 'assert';
+DEL : 'del';
+GLOBAL : 'global';
+NOT : 'not';
+WITH : 'with';
+ASYNC : 'async';
+ELIF : 'elif';
+IF : 'if';
+OR : 'or';
+YIELD : 'yield';
 
 // Operadores aritmeticos
 
-PLUS        : '+';
-MINUS       : '-';
-STAR        : '*';
-DOUBLESTAR  : '**';
-SLASH       : '/';
-DOUBLESLASH : '//';
-PERCENT     : '%';
+SUMA            : '+';
+RESTA           : '-';
+POR             : '*';
+POTENCIA        : '**';
+DIVISION        : '/';
+DIVISION_ENTERA : '//';
+MODULO          : '%';
 
 // Operadores relacionales (de comparacion)
-EQ  : '==';
-NEQ : '!=';
-LE  : '<=';
-GE  : '>=';
-LT  : '<';
-GT  : '>';
+IGUAL_QUE         : '==';
+DISTINTO_DE       : '!=';
+MENOR_O_IGUAL_QUE : '<=';
+MAYOR_O_IGUAL_QUE : '>=';
+MENOR_QUE         : '<';
+MAYOR_QUE         : '>';
 
 // Operadores de asignacion (simple y compuestos)
-ASSIGN         : '=';
-PLUS_ASSIGN    : '+=';
-MINUS_ASSIGN   : '-=';
-STAR_ASSIGN    : '*=';
-SLASH_ASSIGN   : '/=';
-DSLASH_ASSIGN  : '//=';
-PERCENT_ASSIGN : '%=';
-POWER_ASSIGN   : '**=';
-AMP_ASSIGN     : '&=';
-PIPE_ASSIGN    : '|=';
-CARET_ASSIGN   : '^=';
-RSHIFT_ASSIGN  : '>>=';
-LSHIFT_ASSIGN  : '<<=';
-WALRUS         : ':=';
+IGUAL                  : '=';
+IGUAL_SUMA             : '+=';
+IGUAL_RESTA            : '-=';
+IGUAL_POR              : '*=';
+IGUAL_DIVISION         : '/=';
+IGUAL_DIVISION_ENTERA  : '//=';
+IGUAL_MODULO           : '%=';
+IGUAL_POTENCIA         : '**=';
+IGUAL_AND_BIT          : '&=';
+IGUAL_OR_BIT           : '|=';
+IGUAL_XOR_BIT          : '^=';
+IGUAL_DESPLAZ_DER      : '>>=';
+IGUAL_DESPLAZ_IZQ      : '<<=';
+IGUAL_EN_EXPRESION     : ':=';
 
 // Operadores a nivel de bits
-AMP     : '&';
-PIPE    : '|';
-CARET   : '^';
-TILDE   : '~';
-LSHIFT  : '<<';
-RSHIFT  : '>>';
+AND_BIT                  : '&';
+OR_BIT                   : '|';
+XOR_BIT                  : '^';
+NEGACION_BIT              : '~';
+DESPLAZAMIENTO_IZQUIERDA  : '<<';
+DESPLAZAMIENTO_DERECHA    : '>>';
 
 // Delimitadores y puntuacion
-LPAREN   : '(' { self.abiertos += 1 };
-RPAREN   : ')' { self.abiertos -= 1 };
-LBRACKET : '[' { self.abiertos += 1 };
-RBRACKET : ']' { self.abiertos -= 1 };
-LBRACE   : '{' { self.abiertos += 1 };
-RBRACE   : '}' { self.abiertos -= 1 };
+PARENTESIS_IZQUIERDO : '(' { self.abiertos += 1 };
+PARENTESIS_DERECHO   : ')' { self.abiertos -= 1 };
+CORCHETE_IZQUIERDO   : '[' { self.abiertos += 1 };
+CORCHETE_DERECHO     : ']' { self.abiertos -= 1 };
+LLAVE_IZQUIERDA      : '{' { self.abiertos += 1 };
+LLAVE_DERECHA        : '}' { self.abiertos -= 1 };
 
-COMMA    : ',';
-COLON    : ':';
-DOT      : '.';
-SEMI     : ';';
-AT       : '@';
-ARROW    : '->';
-ELLIPSIS : '...';
+COMA               : ',';
+DOS_PUNTOS         : ':';
+PUNTO              : '.';
+PUNTO_Y_COMA       : ';';
+ARROBA             : '@';
+FLECHA             : '->';
+PUNTOS_SUSPENSIVOS : '...';
 
 // Identificadores y literales
-NAME : [a-zA-Z_][a-zA-Z_0-9]*;
-INT
+ID : [a-zA-Z_][a-zA-Z_0-9]*;
+ENTERO
     : [0-9] ('_'? [0-9])*
     | '0' [xX] HEX_DIGIT ('_'? HEX_DIGIT)*
     | '0' [oO] [0-7] ('_'? [0-7])*
     | '0' [bB] [01] ('_'? [01])*
     ;
 fragment HEX_DIGIT : [0-9a-fA-F];
-FLOAT
+FLOTANTE
     : DIGITS '.' DIGITS? EXPONENT?
     | '.' DIGITS EXPONENT?
     | DIGITS EXPONENT
@@ -116,11 +116,11 @@ FLOAT
 fragment DIGITS   : [0-9] ('_'? [0-9])*;
 fragment EXPONENT : [eE] [+-]? DIGITS;
 
-STRING
+CADENA
     : '"' (~["\\\r\n] | '\\' .)* '"'
     | '\'' (~['\\\r\n] | '\\' .)* '\''
     ;
 
-COMMENT : '#' ~[\r\n]* -> skip;
-WS : [ \t]+ -> skip;
-NEWLINE : ('\r'? '\n' | '\r') [ \t]*;
+COMENTARIO : '#' ~[\r\n]* -> skip;
+ESPACIOS : [ \t]+ -> skip;
+NUEVA_LINEA : ('\r'? '\n' | '\r') [ \t]*;
